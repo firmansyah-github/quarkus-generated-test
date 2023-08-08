@@ -1,0 +1,19 @@
+# Use the official k6 image from Grafana as the base image
+FROM grafana/k6:latest
+
+# Set the working directory
+WORKDIR /app
+
+# Copy your K6 collection and environment files
+#COPY src/main/k6/*.sh /app/k6/
+#COPY src/main/k6/*.js /app/k6/
+#COPY src/main/k6/libs /app/k6/libs
+#COPY target/k6/reports/test.txt /app/k6/reports/test.txt
+
+# Make the script executable and report folder writeable
+#USER root
+#RUN chmod +x /app/k6/run.api.tests.sh
+#RUN chmod +w /app/k6/reports
+
+# Set the entrypoint to run the script (optional)
+ENTRYPOINT ["/bin/sh","./k6/run.api.tests.sh"]

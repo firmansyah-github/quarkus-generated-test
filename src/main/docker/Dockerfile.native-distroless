@@ -1,0 +1,47 @@
+####
+# This Dockerfile is used in order to build a container that runs the Quarkus application in native (no JVM) mode.
+# If you are looking for small container images, 
+# the distroless approach reduces the size of the base layer. 
+# The idea behind distroless is the usage of a single and minimal base image containing all the requirements, 
+# and sometimes even the application itself.
+# Distroless image support is experimental.
+# Distroless images should not be used in production without rigorous testing.
+#
+# Building native inside the container image run: (Creating a Linux executable without GraalVM installed)
+#
+# ./mvnw install -Dnative -Dquarkus.native.container-build=true -Dquarkus.native.container-runtime=docker -Dquarkus.native.builder-image=graalvm -DskipTests -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-mandrel-builder-image:21.3.6.0-Final-java11-arm64
+#
+# Based on https://quarkus.io/guides/building-native-image:
+# ./mvnw package -Dnative -Dquarkus.native.container-build=true -Dquarkus.native.container-runtime=docker -DskipTests
+# ./mvnw package -Dnative -Dquarkus.native.container-build=true -Dquarkus.native.container-runtime=docker -DskipTests -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-mandrel:21.3-java11
+# ./mvnw install -Dnative -Dquarkus.native.container-build=true -Dquarkus.native.container-runtime=docker -DskipTests -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-mandrel:21.3-java11
+# ./mvnw install -Dnative -Dquarkus.native.container-build=true -Dquarkus.native.container-runtime=docker -DskipTests
+# ./mvnw install -Dnative -Dquarkus.native.remote-container-build=true -Dquarkus.native.container-runtime=docker -DskipTests 
+# ./mvnw package -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true -DskipTests
+#
+#
+#
+# NOTE:
+# 1. [error]: exec ./application: exec format error
+#    [solution]:https://stackoverflow.com/questions/71332558/quarkus-docker-run-exec-user-process-caused-exec-format-error
+# 2. Always check the .dockerignore, if has issues on 'not found' or 'not included' during docker build
+# 3. Make sure version compatibility between quarkus version and graalvm version, quarkus version and graalvm-ce version must compatible, For Quarkus 2.9.2, the compatible version of GraalVM is 21.3.0. Please note that the compatibility between Quarkus and GraalVM can vary with different versions 
+# 4. Recheck again the version of 'ubi-quarkus-mandrel-builder-image:21.3.6.0-Final-java11-arm64' on https://quay.io/repository/quarkus/ubi-quarkus-mandrel-builder-image?tab=tags and change it if necessary for compatibility
+# 5. In macos, don't use './mvnw package -Pnative' and build image that based on linux, it will error because different os platform
+#
+# Then, build the image with:
+#
+# docker build -f src/main/docker/Dockerfile.native-distroless -t firmansyahprofess/realworld-api-quarkus-native-distroless .
+#
+# Then run the container using:
+#
+# docker run -i --rm -p 8080:8080 firmansyahprofess/realworld-api-quarkus-native-distroless
+#
+###
+FROM quay.io/quarkus/quarkus-distroless-image:2.0
+COPY target/*-runner /application
+
+EXPOSE 8080
+USER nonroot
+
+CMD ["./application", "-Dquarkus.http.host=0.0.0.0"]

@@ -1,0 +1,112 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build and Test') {
+            steps {
+                def imageName = "firmansyahprofess/realworld-api-quarkus-native-cicd"
+                def imageTag = "latest"
+                def dockerfilePath = "src/main/docker/Dockerfile.native.cicd.static"
+                def stages = ["install", "test", "sonarcloud", "package", "native"]
+                
+                script {
+                    for (target in stages) {
+                        try {
+                            docker.build(image: "${imageName}:${imageTag}", dockerfile: "${dockerfilePath}", args: "--build-arg=target=${target}", context: ".")
+                        } catch (Exception e) {
+                            echo "Error: Stage ${target} failed"
+                            error(e)
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Run Services') {
+            steps {
+                script {
+                    try {
+                        sh 'docker-compose -f src/main/docker/Dockerfile.native.cicd.compose.yml up -d'
+                    } catch (Exception e) {
+                        echo "Error: Failed to start services"
+                        error(e)
+                    }
+                }
+            }
+        }
+
+        stage('Wait for Signals') {
+            steps {
+                script {
+                    try {
+                        waitUntil {
+                            def postmanComplete = fileExists('./postman/postman_complete')
+                            def k6Complete = fileExists('./k6/k6_complete')
+                            return postmanComplete && k6Complete
+                        }
+                    } catch (Exception e) {
+                        echo "Error: Signals not received within the timeout"
+                        error(e)
+                    }
+                }
+            }
+        }
+
+        stage('Run ZAP Security Scan') {
+            steps {
+                script {
+                    try {
+                        sh './zap/run.api.tests.sh'
+                    } catch (Exception e) {
+                        echo "Error: ZAP security scan failed"
+                        error(e)
+                    }
+                }
+            }
+        }
+
+        stage('Shutdown Containers') {
+            steps {
+                sh 'docker-compose -f src/main/docker/Dockerfile.native.cicd.compose.yml down'
+            }
+        }
+
+        stage('Cleanup') {
+            steps {
+                deleteFile './postman/postman_complete'
+                deleteFile './k6/k6_complete'
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                script {
+                    def imageName = "firmansyahprofess/realworld-api-quarkus-native-cicd"
+                    def imageTag = "latest"
+                    def targetTag = "1.0.0"
+
+                    try {
+                        sh 'docker login'
+                        sh "docker tag ${imageName}:${imageTag} ${imageName}:${targetTag}"
+                        sh "docker push ${imageName}:${imageTag}"
+                    } catch (Exception e) {
+                        echo "Error: Failed to push image to Docker Hub"
+                        error(e)
+                    }
+                }
+            }
+        }
+
+        stage('Completion') {
+            steps {
+                echo 'Pipeline completed successfully'
+            }
+        }
+    }
+
+    post {
+        failure {
+            echo 'Pipeline failed'
+        }
+    }
+}

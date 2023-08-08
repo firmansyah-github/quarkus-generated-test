@@ -1,0 +1,20 @@
+# Use the official Postman Newman image as the base
+FROM postman/newman:alpine
+
+# install html and htmlextra
+RUN npm uninstall -g newman newman-reporter-htmlextra newman-reporter-html
+RUN npm install -g newman newman-reporter-htmlextra newman-reporter-html
+
+# Set the working directory
+WORKDIR /app
+
+# Copy your Postman collection and environment files
+#COPY src/main/postman/*.sh /app/postman/
+#COPY src/main/postman/*.json /app/postman/
+
+# Make the script executable
+#USER root
+#RUN chmod +x /app/postman/run.api.tests.sh
+
+# Set the entrypoint to run the script (optional)
+ENTRYPOINT ["/bin/sh","./postman/run.api.tests.sh"]
