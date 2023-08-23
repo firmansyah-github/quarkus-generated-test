@@ -1,18 +1,19 @@
 pipeline {
     agent any
+      
 
     stages {
         stage('Build and Test') {
             steps {
-                def imageName = "firmansyahprofess/realworld-api-quarkus-native-cicd"
-                def imageTag = "latest"
-                def dockerfilePath = "src/main/docker/Dockerfile.native.cicd.static"
-                def stages = ["install", "test", "sonarcloud", "package", "native"]
-                
                 script {
+                    def imageName = "firmansyahprofess/realworld-api-quarkus-native-cicd"
+                    def imageTag = "latest"
+                    def dockerfilePath = "src/main/docker/Dockerfile.native.cicd.static"
+                    def stages = ["install", "test", "sonarcloud", "package", "native"]
+                    
                     for (target in stages) {
                         try {
-                            docker.build(image: "${imageName}:${imageTag}", dockerfile: "${dockerfilePath}", args: "--build-arg=target=${target}", context: ".")
+                            docker.image(imageName).build("--file=${dockerfilePath}", "--build-arg=target=${target}", ".")
                         } catch (Exception e) {
                             echo "Error: Stage ${target} failed"
                             error(e)
