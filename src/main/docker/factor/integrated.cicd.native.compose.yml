@@ -1,0 +1,94 @@
+# created by the factor : Dec 7, 2023, 4:03:00 PM  
+version: '3'
+services:
+  app:
+    image: firmansyahprofess/realworld-api-quarkus-native-cicd:latest
+    environment:
+      #5432
+      DB_URL: jdbc:postgresql://db:5432/postgres
+      DB_USER: postgres
+      DB_PASSWORD: xWmGrW0hi4
+      SW_AGENT_COLLECTOR_BACKEND_SERVICES: oap:11800
+      SW_AGENT_NAME: quarkus
+      SW_AGENT_SAMPLE: 6
+      SW_AGENT_INSTANCE_NAME: quarkus-1
+      SW_JDBC_TRACE_SQL_PARAMETERS: true
+    ports:
+      - "8080:8080"
+    networks:
+      - factor-nt
+    depends_on:
+      db:
+        condition: service_healthy
+        
+
+  db:
+    image: postgres:latest
+    container_name: postgresql-database
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: xWmGrW0hi4
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - factor-nt
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 5s
+      retries: 10
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data  # Persist PostgreSQL data
+  
+    
+  postman-node:
+    build:
+      context: ../../../../.
+      dockerfile: src/main/docker/factor/Dockerfile.cicd.postman
+    volumes:
+      - ../../../../src/main/postman:/app/postman
+      - ../../../../target/postman:/app/target/postman
+    networks:
+      - factor-nt
+    environment:
+      APIURL: http://app:8080/api
+    depends_on:
+      - app
+      
+  k6-node:
+    build:
+      context: ../../../../.
+      dockerfile: src/main/docker/factor/Dockerfile.cicd.k6
+    volumes:
+      - ../../../../src/main/k6:/app/k6
+      - ../../../../target/k6:/app/target/k6
+    networks:
+      - factor-nt
+    environment:
+      APIURL: http://app:8080/api
+    depends_on:
+      - app
+      
+
+  zap-runner:
+    build:
+      context: ../../../../.
+      dockerfile: src/main/docker/factor/Dockerfile.cicd.zap
+    networks:
+      - factor-nt
+    volumes:
+      - ../../../../src/main/zap:/app/zap
+      - ../../../../target/zap:/zap/wrk/:rw
+    environment:
+      APIURL: http://app:8080/api
+    depends_on:
+      - app
+
+
+networks:
+  factor-nt:
+    name: factor-nt
+    driver: bridge
+
+volumes:
+  postgresql-data:

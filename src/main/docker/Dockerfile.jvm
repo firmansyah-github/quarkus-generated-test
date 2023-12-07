@@ -1,0 +1,39 @@
+# modify by the factor : Dec 7, 2023, 4:03:00 PM  
+#### 1. Docker Quarkus application in JVM mode
+# 1. This Dockerfile is used in order to build a container that runs the Quarkus application in JVM mode
+# 2. Before building the docker image run:
+#
+# ./mvnw package 
+# ./mvnw package -DskipTests     # if you want to skip unit test
+# 
+# 3. Then, build the image with:
+#
+# docker build -f src/main/docker/Dockerfile.jvm -t quarkus/realworldapiservice-jvm .
+# 
+# 4. Check and verify the connectivity parameter between Docker Quarkus application and database
+# 5. Then run the container using:
+#
+# docker run -i \
+#       #       -e DB_URL="jdbc:postgresql://$(ipconfig getifaddr en0):5432/postgres" \
+#       -e DB_USER="postgres" \
+ #      -e DB_PASSWORD="xWmGrW0hi4" \
+
+#       --rm -p 8080:8080 quarkus/realworldapiservice-jvm
+#
+####
+FROM registry.access.redhat.com/ubi8/openjdk-17:1.15
+
+ENV LANGUAGE='en_US:en'
+
+
+# We make four distinct layers so if there are application changes the library layers can be re-used
+COPY --chown=185 target/quarkus-app/lib/ /deployments/lib/
+COPY --chown=185 target/quarkus-app/*.jar /deployments/
+COPY --chown=185 target/quarkus-app/app/ /deployments/app/
+COPY --chown=185 target/quarkus-app/quarkus/ /deployments/quarkus/
+COPY --chown=185 skywalking-agent /skywalking-agent
+
+EXPOSE 8080
+USER 185
+ENV JAVA_OPTS="-javaagent:/skywalking-agent/skywalking-agent.jar -Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
+ENV JAVA_APP_JAR="/deployments/quarkus-run.jar"
