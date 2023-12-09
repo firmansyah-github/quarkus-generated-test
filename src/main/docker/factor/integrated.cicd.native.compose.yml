@@ -12,7 +12,7 @@ services:
       SW_AGENT_NAME: quarkus
       SW_AGENT_SAMPLE: 6
       SW_AGENT_INSTANCE_NAME: quarkus-1
-      SW_JDBC_TRACE_SQL_PARAMETERS: true
+      SW_JDBC_TRACE_SQL_PARAMETERS: 'true'
     ports:
       - "8080:8080"
     networks:
