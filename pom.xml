@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- modify by the factor : Dec 9, 2023, 9:19:14 AM --> 
+<!-- modify by the factor : Dec 9, 2023, 11:38:39 AM --> 
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -18,8 +18,8 @@
         <quarkus.platform.version>3.5.1</quarkus.platform.version>
         <surefire-plugin.version>3.2.2</surefire-plugin.version>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    	<sonar.organization>firmansyah-github</sonar.organization>
-    	<sonar.projectKey>firmansyah-github_quarkus-generated-test</sonar.projectKey>
+    	<sonar.organization>factor-developer-public</sonar.organization>
+    	<sonar.projectKey>factor-developer-public_quarkus-generated-test</sonar.projectKey>
     	<sonar.branch.name>master</sonar.branch.name>
     </properties>
     <dependencyManagement>
