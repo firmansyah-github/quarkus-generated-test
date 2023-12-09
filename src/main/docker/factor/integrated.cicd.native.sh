@@ -1,9 +1,9 @@
-# created by the factor : Dec 9, 2023, 8:25:21 AM  
+# created by the factor : Dec 9, 2023, 9:19:14 AM  
 #!/bin/sh
 set -e  # Exit on error
 
 # Variables
-IMAGE_NAME="firmansyahprofess/realworld-api-quarkus-native-cicd"
+IMAGE_NAME="factordeveloperpublic/realworld-api-quarkus-native-cicd"
 IMAGE_TAG="latest"
 DOCKERFILE_PATH="src/main/docker/factor/Dockerfile.cicd.app.native"
 

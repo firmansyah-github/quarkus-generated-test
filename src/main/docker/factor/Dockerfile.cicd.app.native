@@ -1,4 +1,4 @@
-# created by the factor : Dec 9, 2023, 8:25:21 AM  
+# created by the factor : Dec 9, 2023, 9:19:14 AM  
 ####
 # This Dockerfile is used in order to build a container that runs the Quarkus application in native (no JVM) mode.
 #
@@ -40,7 +40,7 @@ RUN ./mvnw test
 FROM test AS sonarcloud
 
 # inspect the code using sonarcloud
-RUN ./mvnw clean verify sonar:sonar -Dsonar.token=c8f07b8da132920eac5e3c9b92b34224739710d2 -DskipTests
+RUN ./mvnw clean verify sonar:sonar -Dsonar.token=9753c01aeebd990f7e33d7aea8b4d02badae9e4d -DskipTests
 
 #4# Stage 4: Packaging
 FROM sonarcloud AS package

@@ -1,4 +1,4 @@
-// created by the factor : Dec 9, 2023, 8:25:21 AM  
+// created by the factor : Dec 9, 2023, 9:19:14 AM  
 pipeline {
     agent any
 
@@ -6,7 +6,7 @@ pipeline {
         stage('Build and Test') {
             steps {
                 script {
-                    def imageName = "firmansyahprofess/realworld-api-quarkus-native-cicd"
+                    def imageName = "factordeveloperpublic/realworld-api-quarkus-native-cicd"
                     def imageTag = "latest"
                     def dockerfilePath = "src/main/docker/factor/Dockerfile.native.cicd.static"
                     // Run stages with error handling

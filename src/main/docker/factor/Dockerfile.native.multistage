@@ -1,4 +1,4 @@
-# created by the factor : Dec 9, 2023, 8:25:21 AM  
+# created by the factor : Dec 9, 2023, 9:19:14 AM  
 ####
 # This Dockerfile is used in order to build a container that runs the Quarkus application in native (no JVM) mode.
 #
@@ -13,18 +13,18 @@
 #
 # build the image with:
 #
-# docker build -f src/main/docker/factor/Dockerfile.native.multistage -t firmansyahprofess/realworld-api-quarkus-native-multistage .
+# docker build -f src/main/docker/factor/Dockerfile.native.multistage -t factordeveloperpublic/realworld-api-quarkus-native-multistage .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 firmansyahprofess/realworld-api-quarkus-native-multistage
+# docker run -i --rm -p 8080:8080 factordeveloperpublic/realworld-api-quarkus-native-multistage
 #
 # docker run -i \
 #            #       -e DB_URL="jdbc:postgresql://$(ipconfig getifaddr en0):5432/postgres" \
 #       -e DB_USER="postgres" \
  #      -e DB_PASSWORD="xWmGrW0hi4" \
 
-#            --rm -p 8080:8080 firmansyahprofess/realworld-api-quarkus-native-multistage
+#            --rm -p 8080:8080 factordeveloperpublic/realworld-api-quarkus-native-multistage
 #
 ###
 ## Stage 1 : build with maven builder image with native capabilities

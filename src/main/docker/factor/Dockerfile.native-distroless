@@ -1,4 +1,4 @@
-# created by the factor : Dec 9, 2023, 8:25:21 AM  
+# created by the factor : Dec 9, 2023, 9:19:14 AM  
 ####
 # This Dockerfile is used in order to build a container that runs the Quarkus application in native (no JVM) mode.
 # If you are looking for small container images, 
@@ -32,18 +32,18 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/factor/Dockerfile.native-distroless -t firmansyahprofess/realworld-api-quarkus-native-distroless .
+# docker build -f src/main/docker/factor/Dockerfile.native-distroless -t factordeveloperpublic/realworld-api-quarkus-native-distroless .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 firmansyahprofess/realworld-api-quarkus-native-distroless
+# docker run -i --rm -p 8080:8080 factordeveloperpublic/realworld-api-quarkus-native-distroless
 #
 # docker run -i \
 #            #       -e DB_URL="jdbc:postgresql://$(ipconfig getifaddr en0):5432/postgres" \
 #       -e DB_USER="postgres" \
  #      -e DB_PASSWORD="xWmGrW0hi4" \
 
-#            --rm -p 8080:8080 firmansyahprofess/realworld-api-quarkus-native-distroless
+#            --rm -p 8080:8080 factordeveloperpublic/realworld-api-quarkus-native-distroless
 #
 ###
 FROM quay.io/quarkus/quarkus-distroless-image:2.0

@@ -1,4 +1,4 @@
-# created by the factor : Dec 9, 2023, 8:25:21 AM  
+# created by the factor : Dec 9, 2023, 9:19:14 AM  
 # ![RealWorld Example App](quarkus-logo.png)
 
 > ### Quarkus Framework codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
@@ -101,7 +101,7 @@ for debuging, just run below command and use your IDE with remote debug configur
 
 ### Scan with sonarqube
 ```shell
-./mvnw clean verify sonar:sonar -Dsonar.token=c8f07b8da132920eac5e3c9b92b34224739710d2
+./mvnw clean verify sonar:sonar -Dsonar.token=9753c01aeebd990f7e33d7aea8b4d02badae9e4d
 ```
 
 ### Building native executable (https://quarkus.io/guides/building-native-image)
@@ -247,7 +247,7 @@ docker build -f src/main/docker/Dockerfile.jvm -t quarkus/realworldapiservice-jv
 ```
 or
 ```shell
-docker build -f src/main/docker/factor/Dockerfile.jvm -t firmansyahprofess/realworld-api-quarkus-jvm .
+docker build -f src/main/docker/factor/Dockerfile.jvm -t factordeveloperpublic/realworld-api-quarkus-jvm .
 ```
 
 4. Check and verify the connectivity parameter between Docker Quarkus application and database
@@ -266,18 +266,18 @@ docker run -i \
        -e DB_URL="jdbc:postgresql://$(ipconfig getifaddr en0):5432/postgres" \
        -e DB_USER="postgres" \
        -e DB_PASSWORD="xWmGrW0hi4" \
-       --rm -p 8080:8080 firmansyahprofess/realworld-api-quarkus-jvm
+       --rm -p 8080:8080 factordeveloperpublic/realworld-api-quarkus-jvm
 ```
 6. More environment parameter can be found on src/main/docker/factor/Dockerfile.jvm file
 7. You can run all script above all together as below script:
 ```shell
 ./mvnw package -DskipTests
-docker build -f src/main/docker/factor/Dockerfile.jvm -t firmansyahprofess/realworld-api-quarkus-jvm .
+docker build -f src/main/docker/factor/Dockerfile.jvm -t factordeveloperpublic/realworld-api-quarkus-jvm .
 docker run -i \
        -e DB_URL="jdbc:postgresql://$(ipconfig getifaddr en0):5432/postgres" \
        -e DB_USER="postgres" \
        -e DB_PASSWORD="xWmGrW0hi4" \
-       --rm -p 8080:8080 firmansyahprofess/realworld-api-quarkus-jvm
+       --rm -p 8080:8080 factordeveloperpublic/realworld-api-quarkus-jvm
 ```
 
 ## 2. Docker Quarkus application in JVM mode with legacy jar file style
@@ -293,7 +293,7 @@ or for skip the unit test
 
 3. Then, build the image with:
 ```shell
-docker build -f src/main/docker/factor/Dockerfile.legacy-jar -t firmansyahprofess/realworld-api-quarkus-legacy-jar .
+docker build -f src/main/docker/factor/Dockerfile.legacy-jar -t factordeveloperpublic/realworld-api-quarkus-legacy-jar .
 ```
 
 4. Check and verify the connectivity parameter between Docker Quarkus application and database
@@ -303,19 +303,19 @@ docker run -i \
        -e DB_URL="jdbc:postgresql://$(ipconfig getifaddr en0):5432/postgres" \
        -e DB_USER="postgres" \
        -e DB_PASSWORD="xWmGrW0hi4" \
-           --rm -p 8080:8080 firmansyahprofess/realworld-api-quarkus-legacy-jar
+           --rm -p 8080:8080 factordeveloperpublic/realworld-api-quarkus-legacy-jar
 ```
 
 6. More environment parameter can be found on src/main/docker/factor/Dockerfile.legacy-jar file
 7. You can run all script above all together as below script:
 ```shell
 ./mvnw package -Dquarkus.package.type=legacy-jar -DskipTests
-docker build -f src/main/docker/factor/Dockerfile.legacy-jar -t firmansyahprofess/realworld-api-quarkus-legacy-jar .
+docker build -f src/main/docker/factor/Dockerfile.legacy-jar -t factordeveloperpublic/realworld-api-quarkus-legacy-jar .
 docker run -i \
        -e DB_URL="jdbc:postgresql://$(ipconfig getifaddr en0):5432/postgres" \
        -e DB_USER="postgres" \
        -e DB_PASSWORD="xWmGrW0hi4" \
-           --rm -p 8080:8080 firmansyahprofess/realworld-api-quarkus-legacy-jar
+           --rm -p 8080:8080 factordeveloperpublic/realworld-api-quarkus-legacy-jar
 ```
 
 
@@ -341,15 +341,15 @@ docker run -i \
 6. Then, build the image with: (choose one)
    a. registry.access.redhat.com/ubi8/ubi-minimal:8.6 (native)
 ```shell
-docker build -f src/main/docker/factor/Dockerfile.native -t firmansyahprofess/realworld-api-quarkus-native .
+docker build -f src/main/docker/factor/Dockerfile.native -t factordeveloperpublic/realworld-api-quarkus-native .
 ```
    b. quay.io/quarkus/quarkus-micro-image:2.0 (native-micro)
 ```shell
-docker build -f src/main/docker/factor/Dockerfile.native-micro -t firmansyahprofess/realworld-api-quarkus-native-micro .
+docker build -f src/main/docker/factor/Dockerfile.native-micro -t factordeveloperpublic/realworld-api-quarkus-native-micro .
 ```
    c. quay.io/quarkus/quarkus-distroless-image:2.0 (native-distroless)
 ```shell
-docker build -f src/main/docker/factor/Dockerfile.native-distroless -t firmansyahprofess/realworld-api-quarkus-native-distroless .
+docker build -f src/main/docker/factor/Dockerfile.native-distroless -t factordeveloperpublic/realworld-api-quarkus-native-distroless .
 ```
 
 
@@ -360,7 +360,7 @@ docker run -i \
        -e DB_URL="jdbc:postgresql://$(ipconfig getifaddr en0):5432/postgres" \
        -e DB_USER="postgres" \
        -e DB_PASSWORD="xWmGrW0hi4" \
-           --rm -p 8080:8080 firmansyahprofess/realworld-api-quarkus-native
+           --rm -p 8080:8080 factordeveloperpublic/realworld-api-quarkus-native
 ```
    b. quay.io/quarkus/quarkus-micro-image:2.0 (native-micro)
 ```shell
@@ -368,7 +368,7 @@ docker run -i \
        -e DB_URL="jdbc:postgresql://$(ipconfig getifaddr en0):5432/postgres" \
        -e DB_USER="postgres" \
        -e DB_PASSWORD="xWmGrW0hi4" \
-           --rm -p 8080:8080 firmansyahprofess/realworld-api-quarkus-native-micro
+           --rm -p 8080:8080 factordeveloperpublic/realworld-api-quarkus-native-micro
 ```
    c. quay.io/quarkus/quarkus-distroless-image:2.0 (native-distroless)
 ```shell
@@ -376,7 +376,7 @@ docker run -i \
        -e DB_URL="jdbc:postgresql://$(ipconfig getifaddr en0):5432/postgres" \
        -e DB_USER="postgres" \
        -e DB_PASSWORD="xWmGrW0hi4" \
-           --rm -p 8080:8080 firmansyahprofess/realworld-api-quarkus-native-distroless
+           --rm -p 8080:8080 factordeveloperpublic/realworld-api-quarkus-native-distroless
 ```
 
 
@@ -387,12 +387,12 @@ docker run -i \
 ./mvnw package -DskipTests -Pnative --offline -T 8 -Dquarkus.native.container-build=true \
                                     -Dquarkus.native.container-runtime=docker \
                                     -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-mandrel-builder-image:23.1.1.0-Final-java21-arm64
-docker build -f src/main/docker/factor/Dockerfile.native -t firmansyahprofess/realworld-api-quarkus-native .
+docker build -f src/main/docker/factor/Dockerfile.native -t factordeveloperpublic/realworld-api-quarkus-native .
 docker run -i \
        -e DB_URL="jdbc:postgresql://$(ipconfig getifaddr en0):5432/postgres" \
        -e DB_USER="postgres" \
        -e DB_PASSWORD="xWmGrW0hi4" \
-           --rm -p 8080:8080 firmansyahprofess/realworld-api-quarkus-native
+           --rm -p 8080:8080 factordeveloperpublic/realworld-api-quarkus-native
 ```
 
       b. quay.io/quarkus/quarkus-micro-image:2.0 (native-micro)
@@ -401,12 +401,12 @@ docker run -i \
 ./mvnw package -DskipTests -Pnative --offline -T 8 -Dquarkus.native.container-build=true \
                                     -Dquarkus.native.container-runtime=docker \
                                     -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-mandrel-builder-image:23.1.1.0-Final-java21-arm64
-docker build -f src/main/docker/factor/Dockerfile.native-micro -t firmansyahprofess/realworld-api-quarkus-native-micro .
+docker build -f src/main/docker/factor/Dockerfile.native-micro -t factordeveloperpublic/realworld-api-quarkus-native-micro .
 docker run -i \
        -e DB_URL="jdbc:postgresql://$(ipconfig getifaddr en0):5432/postgres" \
        -e DB_USER="postgres" \
        -e DB_PASSWORD="xWmGrW0hi4" \
-           --rm -p 8080:8080 firmansyahprofess/realworld-api-quarkus-native-micro
+           --rm -p 8080:8080 factordeveloperpublic/realworld-api-quarkus-native-micro
 ```
 
       c. quay.io/quarkus/quarkus-distroless-image:2.0 (native-distroless)
@@ -415,19 +415,19 @@ docker run -i \
 ./mvnw package -DskipTests -Pnative --offline -T 8 -Dquarkus.native.container-build=true \
                                     -Dquarkus.native.container-runtime=docker \
                                     -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-mandrel-builder-image:23.1.1.0-Final-java21-arm64
-docker build -f src/main/docker/factor/Dockerfile.native-distroless -t firmansyahprofess/realworld-api-quarkus-native-distroless .
+docker build -f src/main/docker/factor/Dockerfile.native-distroless -t factordeveloperpublic/realworld-api-quarkus-native-distroless .
 docker run -i \
        -e DB_URL="jdbc:postgresql://$(ipconfig getifaddr en0):5432/postgres" \
        -e DB_USER="postgres" \
        -e DB_PASSWORD="xWmGrW0hi4" \
-           --rm -p 8080:8080 firmansyahprofess/realworld-api-quarkus-native-distroless
+           --rm -p 8080:8080 factordeveloperpublic/realworld-api-quarkus-native-distroless
 ```
     
 ## 4. Docker Quarkus application in native (no JVM) mode with multistage
 1. This Dockerfile is used in order to build a container that runs the Quarkus application in native (no JVM) mode.
 2. build the image with:
 ```shell
-docker build -f src/main/docker/factor/Dockerfile.native.multistage -t firmansyahprofess/realworld-api-quarkus-native-multistage .
+docker build -f src/main/docker/factor/Dockerfile.native.multistage -t factordeveloperpublic/realworld-api-quarkus-native-multistage .
 ```
 
 3. Then run the container using:
@@ -436,16 +436,16 @@ docker run -i \
        -e DB_URL="jdbc:postgresql://$(ipconfig getifaddr en0):5432/postgres" \
        -e DB_USER="postgres" \
        -e DB_PASSWORD="xWmGrW0hi4" \
-                      --rm -p 8080:8080 firmansyahprofess/realworld-api-quarkus-native-multistage
+                      --rm -p 8080:8080 factordeveloperpublic/realworld-api-quarkus-native-multistage
 ```
 4. You can run all script above all together as below script:
 ```shell
-docker build -f src/main/docker/factor/Dockerfile.native.multistage -t firmansyahprofess/realworld-api-quarkus-native-multistage .
+docker build -f src/main/docker/factor/Dockerfile.native.multistage -t factordeveloperpublic/realworld-api-quarkus-native-multistage .
 docker run -i \
        -e DB_URL="jdbc:postgresql://$(ipconfig getifaddr en0):5432/postgres" \
        -e DB_USER="postgres" \
        -e DB_PASSWORD="xWmGrW0hi4" \
-                      --rm -p 8080:8080 firmansyahprofess/realworld-api-quarkus-native-multistage
+                      --rm -p 8080:8080 factordeveloperpublic/realworld-api-quarkus-native-multistage
 ```
 5. Issues : qemu-x86_64: Could not open '/lib64/ld-linux-x86-64.so.2': No such file or directory
    RCA    : because using 23.1.1.0-Final-java21-amd64 image in MacOs M1 ARM64
@@ -459,8 +459,8 @@ docker run -i \
 3. Register in Docker Hub
 4. Set isBuild=false, inside below script to bypass No.1 (Build stages)
 ```shell
-export DOCKER_PASSWORD=profess250180
-export DOCKER_USER=firmansyahprofess
+export DOCKER_PASSWORD=publicQ!@#123
+export DOCKER_USER=factordeveloperpublic
 ./src/main/docker/factor/integrated.cicd.native.sh
 ```
 
