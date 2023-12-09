@@ -29,7 +29,7 @@ rm -f ./target/zap/factor.zap_complete
 # Run app, database, postman, k6 and zap
 docker-compose -f src/main/docker/factor/integrated.cicd.native.compose.yml up -d || { echo "Error: Failed to start services"; exit 1; }
 
-docker logs factor_postman-node_1
+docker logs -f factor_postman-node_1
 # Wait for both signals
 while ! ([ -e ./target/postman/factor.postman_complete ] && [ -e ./target/k6/factor.k6_complete ]  && [ -e ./target/zap/factor.zap_complete ]); do
     sleep 1
