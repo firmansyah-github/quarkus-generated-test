@@ -29,10 +29,31 @@ rm -f ./target/zap/factor.zap_complete
 # Run app, database, postman, k6 and zap
 docker-compose -f src/main/docker/factor/integrated.cicd.native.compose.yml up -d || { echo "Error: Failed to start services"; exit 1; }
 
-docker logs -f factor_postman-node_1
-# Wait for both signals
-while ! ([ -e ./target/postman/factor.postman_complete ] && [ -e ./target/k6/factor.k6_complete ]  && [ -e ./target/zap/factor.zap_complete ]); do
-    sleep 1
+
+
+# Wait for all signals
+while true; do
+    postman_complete="./target/postman/factor.postman_complete"
+    k6_complete="./target/k6/factor.k6_complete"
+    zap_complete="./target/zap/factor.zap_complete"
+
+    postman_exists=$(if [ -e "$postman_complete" ]; then echo "true"; else echo "false"; fi)
+    k6_exists=$(if [ -e "$k6_complete" ]; then echo "true"; else echo "false"; fi)
+    zap_exists=$(if [ -e "$zap_complete" ]; then echo "true"; else echo "false"; fi)
+
+    echo "Is Postman complete: $postman_exists"
+    echo "Is k6 complete: $k6_exists"
+    echo "Is Zap complete: $zap_exists"
+    
+    docker logs factor_postman-node_1
+    docker logs factor_k6-node_1
+    docker logs factor_zap-runner_1
+
+    if [ "$postman_exists" = "true" ] && [ "$k6_exists" = "true" ] && [ "$zap_exists" = "true" ]; then
+        break
+    else
+        sleep 1
+    fi
 done
 
 
