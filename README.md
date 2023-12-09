@@ -459,7 +459,7 @@ docker run -i \
 3. Register in Docker Hub
 4. Set isBuild=false, inside below script to bypass No.1 (Build stages)
 ```shell
-export DOCKER_PASSWORD=publicQ!@#123
+export DOCKER_PASSWORD='publicQ!@#123'
 export DOCKER_USER=factordeveloperpublic
 ./src/main/docker/factor/integrated.cicd.native.sh
 ```

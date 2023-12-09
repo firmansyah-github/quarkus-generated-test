@@ -1,4 +1,4 @@
-# created by the factor : Dec 9, 2023, 9:19:14 AM  
+# created by the factor : Dec 9, 2023, 9:10:32 AM  
 #!/bin/sh
 set -e  # Exit on error
 
@@ -44,11 +44,10 @@ rm -f ./target/k6/factor.k6_complete
 rm -f ./target/zap/factor.zap_complete
 
 # Push to Docker Hub with error handling
-echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USER --password-stdin registry.hub.docker.com
+echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USER --password-stdin
 # docker login || { echo "Error: Docker login failed"; exit 1; }
-docker tag "$IMAGE_NAME:$IMAGE_TAG" "$IMAGE_NAME:1.0.0" || { echo "Error: Failed to tag image"; exit 1; }
+docker tag "$IMAGE_NAME:$IMAGE_TAG" "$IMAGE_NAME:$IMAGE_TAG"  || { echo "Error: Failed to tag image"; exit 1; }
 docker push "$IMAGE_NAME:$IMAGE_TAG" || { echo "Error: Failed to push image"; exit 1; }
-#docker push "$IMAGE_NAME:1.0.0" || { echo "Error: Failed to push image"; exit 1; }
 
 # All stages completed successfully
 echo "Pipeline completed successfully"
