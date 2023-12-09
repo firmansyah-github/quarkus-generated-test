@@ -18,12 +18,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '17'
-          
-      - name: Set up Docker
-        uses: docker/setup-docker@v2
-        with:
-          dockerfile: Dockerfile
-          container-name: docker-container
+         
 
       - name: Grant execute permissions
         run: |
