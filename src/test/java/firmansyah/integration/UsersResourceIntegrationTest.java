@@ -1,4 +1,4 @@
-// created by the factor : Dec 7, 2023, 4:03:22 PM  
+// created by the factor : Dec 9, 2023, 8:25:21 AM  
 package firmansyah.integration;
 
 import static io.restassured.RestAssured.given;
@@ -541,7 +541,7 @@ public class UsersResourceIntegrationTest extends ResourcesIntegrationTest {
 					"users[0]",
 					 hasKey("username") ,
 					"usersCount",
-					 is(10+1)
+					 is(10)
 				);
 				
 	}
@@ -604,7 +604,7 @@ public class UsersResourceIntegrationTest extends ResourcesIntegrationTest {
 	        .body(
 					
 					"usersCount",
-					 is(0+1)
+					 is(0)
 				);
 				
 	}
@@ -630,7 +630,7 @@ public class UsersResourceIntegrationTest extends ResourcesIntegrationTest {
 	        .body(
 					
 					"usersCount",
-					 is(0+1)
+					 is(0)
 				);
 				
 	}
@@ -750,34 +750,34 @@ public class UsersResourceIntegrationTest extends ResourcesIntegrationTest {
 				"users[0].bio",
 				 Matchers.notNullValue(),
 				"users[0].bio",
-				 is(user.getBio()),
+				 is(usersEntity.getBio()),
 				"users[0].email",
 				 Matchers.notNullValue(),
 				"users[0].email",
-				 is(user.getEmail()),
+				 is(usersEntity.getEmail()),
 				"users[0].id",
 				 Matchers.notNullValue(),
 				"users[0].id",
-				 is(user.getId()),
+				 is(usersEntity.getId()),
 				"users[0].image",
 				 Matchers.notNullValue(),
 				"users[0].image",
-				 is(user.getImage()),
+				 is(usersEntity.getImage()),
 				"users[0].password",
 				 Matchers.notNullValue(),
 				"users[0].password",
-				 is(user.getPassword()),
+				 is(usersEntity.getPassword()),
 				"users[0].username",
 				 Matchers.notNullValue(),
 				"users[0].username",
-				 is(user.getUsername())
+				 is(usersEntity.getUsername())
 				);
 				
 	}
 	
 	@Test
 	public void given10Users_whenExecuteFindUsersByFilter_WithOffset0AndLimit10_FilterAllFields_NotEquals_Or_shouldReturnFilteredUsers() {
-		final var user = createUserEntity("user1", "user1@mail.com", "bio1", "image1", "password");
+		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	    
 	    final var usersEntity = createUsers("");
@@ -893,7 +893,7 @@ public class UsersResourceIntegrationTest extends ResourcesIntegrationTest {
 	
 	@Test
 	public void given10Users_whenExecuteFindUsersByFilter_WithOffset0AndLimit10_FilterAllFields_NotLike_Or_shouldReturnFilteredUsers() {
-		final var user = createUserEntity("user1", "user1@mail.com", "bio1", "image1", "password");
+		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	    
 	    final var usersEntity = createUsers("");
@@ -1044,27 +1044,27 @@ public class UsersResourceIntegrationTest extends ResourcesIntegrationTest {
 				"users[0].bio",
 				 Matchers.notNullValue(),
 				"users[0].bio",
-				 is(user.getBio()),
+				 is(usersEntity.getBio()),
 				"users[0].email",
 				 Matchers.notNullValue(),
 				"users[0].email",
-				 is(user.getEmail()),
+				 is(usersEntity.getEmail()),
 				"users[0].id",
 				 Matchers.notNullValue(),
 				"users[0].id",
-				 is(user.getId()),
+				 is(usersEntity.getId()),
 				"users[0].image",
 				 Matchers.notNullValue(),
 				"users[0].image",
-				 is(user.getImage()),
+				 is(usersEntity.getImage()),
 				"users[0].password",
 				 Matchers.notNullValue(),
 				"users[0].password",
-				 is(user.getPassword()),
+				 is(usersEntity.getPassword()),
 				"users[0].username",
 				 Matchers.notNullValue(),
 				"users[0].username",
-				 is(user.getUsername())
+				 is(usersEntity.getUsername())
 				);
 				
 	}

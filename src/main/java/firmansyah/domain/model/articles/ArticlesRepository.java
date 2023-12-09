@@ -1,4 +1,4 @@
-// created by the factor : Dec 7, 2023, 4:03:00 PM  
+// created by the factor : Dec 9, 2023, 8:25:21 AM  
 package firmansyah.domain.model.articles;
 
 import firmansyah.application.web.resource.abs.ResourceFilter;

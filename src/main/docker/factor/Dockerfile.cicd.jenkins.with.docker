@@ -1,12 +1,13 @@
-# created by the factor : Dec 7, 2023, 4:03:00 PM  
+# created by the factor : Dec 9, 2023, 8:25:21 AM  
 
 # docker build -f src/main/docker/factor/Dockerfile.cicd.jenkins.with.docker -t factor-jenkins-docker .
 
-# create docker volume
-# docker volume create jenkins_home
+# create directory in the host for container docker of k6, postman, and zap can mount, read and write the files that required
+# sudo mkdir -p /var/jenkins_home
+# sudo chmod ugo+w /var/jenkins_home
 
 # modify volume mounted, below is for MacOs or Linux based OS
-# docker run -it -p 8080:8080 -p 50000:50000 -v /var/run/docker.sock:/var/run/docker.sock -v jenkins_home:/var/jenkins_home factor-jenkins-docker
+# docker run -it -p 8081:8080 -p 50000:50000 -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home:/var/jenkins_home -e JAVA_OPTS="-Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400" factor-jenkins-docker
         
 # firmansyahprofess/factor-jenkins-docker
 # https://linuxiac.com/how-to-install-docker-on-debian-12-bookworm/
@@ -34,4 +35,14 @@ RUN apt update
 RUN apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin
 
 
+# Step 5: Install Docker Compose v2.23.3
+RUN curl -fsSL https://github.com/docker/compose/releases/download/v2.23.3/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+RUN chmod +x /usr/local/bin/docker-compose
+
+
 RUN usermod -aG docker jenkins
+
+
+
+
+

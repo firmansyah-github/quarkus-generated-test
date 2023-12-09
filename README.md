@@ -1,4 +1,4 @@
-# created by the factor : Dec 7, 2023, 4:03:00 PM  
+# created by the factor : Dec 9, 2023, 8:25:21 AM  
 # ![RealWorld Example App](quarkus-logo.png)
 
 > ### Quarkus Framework codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
@@ -459,6 +459,8 @@ docker run -i \
 3. Register in Docker Hub
 4. Set isBuild=false, inside below script to bypass No.1 (Build stages)
 ```shell
+export DOCKER_PASSWORD=profess250180
+export DOCKER_USER=firmansyahprofess
 ./src/main/docker/factor/integrated.cicd.native.sh
 ```
 

@@ -1,4 +1,4 @@
-# created by the factor : Dec 7, 2023, 4:03:00 PM  
+# created by the factor : Dec 9, 2023, 8:25:21 AM  
 ####
 # This Dockerfile is used in order to build a container that runs the Quarkus application in native (no JVM) mode.
 # It uses a micro base image, tuned for Quarkus native executables.
