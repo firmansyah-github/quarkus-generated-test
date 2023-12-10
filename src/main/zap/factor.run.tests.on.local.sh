@@ -32,6 +32,6 @@ MINUTES=2
 # ZAP - API Scan
 #zap-api-scan.py -f openapi -t $APIURLVAR -g api-gen.conf -r rep.api.$HTMLREPORT -w rep.api.$MDREPORT -x rep.api.$XMLREPORT -J rep.api.$JSONREPORT
 
-sudo chmod -R +rw /zap/wrk/
+chmod -R oug+rw /zap/wrk/
 ls -al /zap/wrk/
-sudo touch /zap/wrk/factor.zap_complete
+touch /zap/wrk/factor.zap_complete
