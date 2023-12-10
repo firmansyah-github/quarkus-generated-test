@@ -7,12 +7,12 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Cloning the repository
-                git branch: 'master', url: 'https://github.com/firmansyah-github/quarkus-generated-test.git'
-            }
-        }
+        //stage('Checkout') {
+        //    steps {
+        //        // Cloning the repository
+        //        git branch: 'master', url: 'https://github.com/firmansyah-github/quarkus-generated-test.git'
+        //    }
+        //}
 
         stage('Run Script') {
             steps {
