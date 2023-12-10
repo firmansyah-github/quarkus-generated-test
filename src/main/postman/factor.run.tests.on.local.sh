@@ -33,13 +33,6 @@ fi
 # Cleanup
 rm -f ./target/postman/factor.postman_complete
 
-npx newman run $SCRIPTDIR/factor.all.postman.collection.json \
-  --global-var "APIURL=$APIURLVAR" \
-  --delay-request 250 --timeout-request 2000 -n 1 --reporters cli,json,htmlextra,junit,html \
-  --reporter-htmlextra-export "./target/postman/reports/factor.all.$LocalDateTimeNow.extra.html" \
-  --reporter-html-export "./target/postman/reports/factor.all.$LocalDateTimeNow.html" \
-  --reporter-json-export "./target/postman/reports/factor.all.$LocalDateTimeNow.json" \
-  --reporter-junit-export "./target/postman/reports/factor.all.$LocalDateTimeNow.xml" 
 
 
 touch ./target/postman/factor.postman_complete

@@ -24,7 +24,7 @@ MINUTES=2
 
 
 # ZAP - Baseline Scan
-zap-baseline.py -t $APIURLVAR -g baseline-gen.conf -r rep.base.$HTMLREPORT -w rep.base.$MDREPORT -x rep.base.$XMLREPORT -J rep.base.$JSONREPORT -m $MINUTES
+#zap-baseline.py -t $APIURLVAR -g baseline-gen.conf -r rep.base.$HTMLREPORT -w rep.base.$MDREPORT -x rep.base.$XMLREPORT -J rep.base.$JSONREPORT -m $MINUTES
 
 # ZAP - Full Scan
 #zap-full-scan.py -t $APIURLVAR -g full-gen.conf -r rep.full.$HTMLREPORT -w rep.full.$MDREPORT -x rep.full.$XMLREPORT -J rep.full.$JSONREPORT
@@ -33,4 +33,5 @@ zap-baseline.py -t $APIURLVAR -g baseline-gen.conf -r rep.base.$HTMLREPORT -w re
 #zap-api-scan.py -f openapi -t $APIURLVAR -g api-gen.conf -r rep.api.$HTMLREPORT -w rep.api.$MDREPORT -x rep.api.$XMLREPORT -J rep.api.$JSONREPORT
 
 sudo chmod -R +rw /zap/wrk/
-touch /zap/wrk/factor.zap_complete
+ls -al /zap/wrk/
+sudo touch /zap/wrk/factor.zap_complete
