@@ -1,4 +1,4 @@
-# created by the factor : Dec 11, 2023, 5:57:49 AM  
+# created by the factor : Dec 11, 2023, 6:17:17 AM  
 name: Factor CI Workflow
 
 on:
@@ -19,12 +19,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-          
-      - name: Set up Docker
-        uses: docker/setup-docker@v2
-        with:
-          dockerfile: Dockerfile
-          container-name: docker-container
 
       - name: Grant execute permissions
         run: |
