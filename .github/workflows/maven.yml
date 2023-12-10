@@ -31,8 +31,6 @@ jobs:
           chmod -R oug+rw ./target/postman/reports/
           mkdir -p ./target/zap
           chmod -R oug+rw ./target/zap/
-          ls -al ./target/zap/
-          ls -al ./target/k6/
           
           
       - name: Run Script

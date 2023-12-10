@@ -21,9 +21,6 @@ else
     # Create the directory
     mkdir -p "$directory"
     chmod -R uog+rw "$directory"
-    chmod -R uog+rw target/k6
-    ls -al target/k6/reports
-    ls -al target/k6
     echo "Directory '$directory' created."
 fi
 
