@@ -1,4 +1,4 @@
-# created by the factor : Dec 11, 2023, 5:57:49 AM  
+# created by the factor : Dec 11, 2023, 6:20:46 AM  
 version: '3'
 services:
   app:
@@ -45,6 +45,7 @@ services:
     build:
       context: ../../../../.
       dockerfile: src/main/docker/factor/Dockerfile.cicd.postman
+    container_name: postman-node
     volumes:
       - ../../../../src/main/postman:/app/postman
       - ../../../../target/postman:/app/target/postman
@@ -59,6 +60,7 @@ services:
     build:
       context: ../../../../.
       dockerfile: src/main/docker/factor/Dockerfile.cicd.k6
+    container_name: k6-node
     volumes:
       - ../../../../src/main/k6:/app/k6
       - ../../../../target/k6:/app/target/k6
@@ -74,6 +76,7 @@ services:
     build:
       context: ../../../../.
       dockerfile: src/main/docker/factor/Dockerfile.cicd.zap
+    container_name: zap-runner
     networks:
       - factor-nt
     volumes:
