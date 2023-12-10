@@ -1,4 +1,4 @@
-# created by the factor : Dec 9, 2023, 9:19:14 AM  
+# created by the factor : Dec 11, 2023, 5:57:49 AM  
 #!/bin/sh
 set -x
 
@@ -194,7 +194,7 @@ LocalDateTimeNow=$(date +'%Y-%m-%dT%H:%M:%S.%6N')
 
 # ALL
 # Run a single VU, once.
-#k6 run $SCRIPTDIR/factor.all.k6.collection.js --env RPT=./target/k6/reports/factor.all.1VU.1x.$LocalDateTimeNow.html --env URL=$APIURLVAR
+k6 run $SCRIPTDIR/factor.all.k6.collection.js --env RPT=./target/k6/reports/factor.all.1VU.1x.$LocalDateTimeNow.html --env URL=$APIURLVAR
 
   # Run a single VU, 10 times.
 #k6 run -i 10 $SCRIPTDIR/factor.all.k6.collection.js --env RPT=./target/k6/reports/factor.all.1VU.10x.$LocalDateTimeNow.html --env URL=$APIURLVAR

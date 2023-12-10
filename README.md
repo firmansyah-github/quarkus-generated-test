@@ -1,4 +1,4 @@
-# created by the factor : Dec 9, 2023, 9:19:14 AM  
+# created by the factor : Dec 11, 2023, 6:01:22 AM  
 # ![RealWorld Example App](quarkus-logo.png)
 
 > ### Quarkus Framework codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
@@ -464,8 +464,33 @@ export DOCKER_USER=factordeveloperpublic
 ./src/main/docker/factor/integrated.cicd.native.sh
 ```
 
+## Jenkins pipeline CICD using host docker
+1. Build image that has Jenkins (Debian 12) with docker
+```shell
+docker build -f src/main/docker/factor/Dockerfile.cicd.jenkins.with.docker -t factor-jenkins-docker .
+```
 
+2. Create directory in the host for container docker of k6, postman, and zap, so the container can mount, read and write the files that required
+```shell
+sudo mkdir -p /var/jenkins_home
+sudo chmod ugo+w /var/jenkins_home
+```
 
+3. Modify volume that will be mounted, below is for MacOs or Linux based OS, and provide enough cpu and memory
+```shell
+docker run -it \
+  -p 8081:8080 -p 50000:50000 \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /var/jenkins_home:/var/jenkins_home \
+  -e JAVA_OPTS="-Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400" \
+  --cpus=8 \
+  --memory=6g \
+  --memory-swap=8g \
+  --memory-reservation=1g \
+  --memory-swappiness=0 \
+  --cpu-shares=1024 \
+  factor-jenkins-docker
+```
 
 #### Database changes can be made to the application.properties file.
 

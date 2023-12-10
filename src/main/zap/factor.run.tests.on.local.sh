@@ -1,4 +1,4 @@
-# created by the factor : Dec 9, 2023, 9:19:14 AM  
+# created by the factor : Dec 11, 2023, 5:57:49 AM  
 #!/bin/sh
 set -x
 
@@ -24,13 +24,14 @@ MINUTES=2
 
 
 # ZAP - Baseline Scan
-#zap-baseline.py -t $APIURLVAR -g baseline-gen.conf -r rep.base.$HTMLREPORT -w rep.base.$MDREPORT -x rep.base.$XMLREPORT -J rep.base.$JSONREPORT -m $MINUTES
+zap-baseline.py -t $APIURLVAR -g baseline-gen.conf -r rep.base.$HTMLREPORT -w rep.base.$MDREPORT -x rep.base.$XMLREPORT -J rep.base.$JSONREPORT -m $MINUTES
 
 # ZAP - Full Scan
 #zap-full-scan.py -t $APIURLVAR -g full-gen.conf -r rep.full.$HTMLREPORT -w rep.full.$MDREPORT -x rep.full.$XMLREPORT -J rep.full.$JSONREPORT
 
 # ZAP - API Scan
 #zap-api-scan.py -f openapi -t $APIURLVAR -g api-gen.conf -r rep.api.$HTMLREPORT -w rep.api.$MDREPORT -x rep.api.$XMLREPORT -J rep.api.$JSONREPORT
+
 
 chmod -R oug+rw /zap/wrk/
 touch /zap/wrk/factor.zap_complete

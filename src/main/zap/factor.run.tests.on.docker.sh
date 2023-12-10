@@ -1,4 +1,4 @@
-# created by the factor : Dec 9, 2023, 9:19:14 AM  
+# created by the factor : Dec 11, 2023, 5:57:49 AM  
 #!/bin/sh
 set -x
 
@@ -43,13 +43,13 @@ docker run --rm  -v $script_dir/../../../target/zap:/zap/wrk/:rw -t ghcr.io/zapr
 
 
 # ZAP - Full Scan  
-docker run --rm  -v $script_dir/../../../target/zap:/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:$IMGTYPE zap-full-scan.py \
-    -t $APIURLVAR -g full-gen.conf -r rep.full.$HTMLREPORT -w rep.full.$MDREPORT -x rep.full.$XMLREPORT -J rep.full.$JSONREPORT 
+#docker run --rm  -v $script_dir/../../../target/zap:/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:$IMGTYPE zap-full-scan.py \
+#    -t $APIURLVAR -g full-gen.conf -r rep.full.$HTMLREPORT -w rep.full.$MDREPORT -x rep.full.$XMLREPORT -J rep.full.$JSONREPORT 
     
 #ZAP - API Scan
 #-f format         openapi, soap, or graphql
-docker run --rm  -v $script_dir/../../../target/zap:/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:$IMGTYPE zap-api-scan.py -f openapi \
-    -t $APIURLVAR -g api-gen.conf -r rep.api.$HTMLREPORT -w rep.api.$MDREPORT -x rep.api.$XMLREPORT -J rep.api.$JSONREPORT     
+#docker run --rm  -v $script_dir/../../../target/zap:/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:$IMGTYPE zap-api-scan.py -f openapi \
+#    -t $APIURLVAR -g api-gen.conf -r rep.api.$HTMLREPORT -w rep.api.$MDREPORT -x rep.api.$XMLREPORT -J rep.api.$JSONREPORT     
     
 
 
