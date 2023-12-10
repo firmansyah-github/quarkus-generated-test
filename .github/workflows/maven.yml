@@ -31,9 +31,7 @@ jobs:
           sudo chmod -R +rw ./target/postman/reports/
           mkdir -p ./target/zap
           sudo chmod -R +rw ./target/zap/
-          touch ./target/postman/factor.postman_complete
-          touch ./target/k6/factor.k6_complete
-          touch ./target/zap/factor.zap_complete
+          
           
       - name: Run Script
         run: |

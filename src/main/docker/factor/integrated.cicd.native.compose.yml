@@ -60,8 +60,8 @@ services:
       context: ../../../../.
       dockerfile: src/main/docker/factor/Dockerfile.cicd.k6
     volumes:
-      - ../../../../src/main/k6:/app/k6
-      - ../../../../target/k6:/app/target/k6
+      - ../../../../src/main/k6:/app/k6:rw
+      - ../../../../target/k6:/app/target/k6:rw
     networks:
       - factor-nt
     environment:
