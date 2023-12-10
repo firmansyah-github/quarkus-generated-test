@@ -47,19 +47,19 @@ while true; do
     
     if [ "$postman_exists" = "false" ]; then
     	echo "--------10 last log line of POSTMAN---------------"
-    	docker logs -n 10 factor_postman-node_1
+    	docker logs -n 10 postman-node
     	echo "--------------------------------------------------"    
     fi
     
     if [ "$k6_exists" = "false" ]; then
     	echo "--------10 last log line of K6---------------"
-    	docker logs -n 10 factor_k6-node_1
+    	docker logs -n 10 k6-node
     	echo "--------------------------------------------------"    
     fi
     
     if [ "$zap_exists" = "false" ]; then
     	echo "--------10 last log line of ZAP---------------"
-    	docker logs -n 10 factor_zap-runner_1
+    	docker logs -n 10 zap-runner
     	echo "--------------------------------------------------"    
     fi
 
