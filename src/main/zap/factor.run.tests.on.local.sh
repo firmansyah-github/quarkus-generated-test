@@ -32,5 +32,5 @@ zap-baseline.py -t $APIURLVAR -g baseline-gen.conf -r rep.base.$HTMLREPORT -w re
 # ZAP - API Scan
 #zap-api-scan.py -f openapi -t $APIURLVAR -g api-gen.conf -r rep.api.$HTMLREPORT -w rep.api.$MDREPORT -x rep.api.$XMLREPORT -J rep.api.$JSONREPORT
 
-
+sudo chmod -R +rw /zap/wrk/
 touch /zap/wrk/factor.zap_complete
