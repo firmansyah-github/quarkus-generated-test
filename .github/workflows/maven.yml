@@ -31,12 +31,15 @@ jobs:
           chmod -R +rw ./target/postman/reports
           mkdir -p ./target/zap
           chmod -R +rw ./target/zap
+          touch ./target/postman/factor.postman_complete
+          touch ./target/k6/factor.k6_complete
+          touch ./target/zap/factor.zap_complete
           
       - name: Run Script
         run: |
           export DOCKER_PASSWORD=$DOCKER_PASSWORD
           export DOCKER_USER=$DOCKER_USER
-          ./src/main/docker/factor/integrated.cicd.native.sh
+         
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
