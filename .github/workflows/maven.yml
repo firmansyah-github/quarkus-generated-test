@@ -26,8 +26,11 @@ jobs:
           chmod +x ./src/main/docker/factor/integrated.cicd.native.sh
           chmod +x ./mvnw
           mkdir -p ./target/k6/reports
+          chmod -R +rw ./target/k6/reports
           mkdir -p ./target/postman/reports
+          chmod -R +rw ./target/postman/reports
           mkdir -p ./target/zap
+          chmod -R +rw ./target/zap
           
       - name: Run Script
         run: |

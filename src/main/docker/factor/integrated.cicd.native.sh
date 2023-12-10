@@ -45,9 +45,23 @@ while true; do
     echo "Is k6 complete: $k6_exists"
     echo "Is Zap complete: $zap_exists"
     
-    docker logs -n 10 factor_postman-node_1
-    docker logs -n 10 factor_k6-node_1
-    docker logs -n 10 factor_zap-runner_1
+    if [ "$postman_exists" = "false" ]; then
+    	echo "--------10 last log line of POSTMAN---------------"
+    	docker logs -n 10 factor_postman-node_1
+    	echo "--------------------------------------------------"    
+    fi
+    
+    if [ "$k6_exists" = "false" ]; then
+    	echo "--------10 last log line of K6---------------"
+    	docker logs -n 10 factor_k6-node_1
+    	echo "--------------------------------------------------"    
+    fi
+    
+    if [ "$zap_exists" = "false" ]; then
+    	echo "--------10 last log line of ZAP---------------"
+    	docker logs -n 10 factor_zap-runner_1
+    	echo "--------------------------------------------------"    
+    fi
 
     if [ "$postman_exists" = "true" ] && [ "$k6_exists" = "true" ] && [ "$zap_exists" = "true" ]; then
         break
