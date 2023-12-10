@@ -20,6 +20,7 @@ if [ -d "$directory" ]; then
 else
     # Create the directory
     mkdir -p "$directory"
+    sudo chmod -R +rw "$directory"
     echo "Directory '$directory' created."
 fi
 
