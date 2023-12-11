@@ -1,4 +1,4 @@
-# created by the factor : Dec 11, 2023, 5:57:49 AM  
+# created by the factor : Dec 11, 2023, 6:10:51 PM  
 # Use the official k6 image from Grafana as the base image
 FROM grafana/k6:latest
 

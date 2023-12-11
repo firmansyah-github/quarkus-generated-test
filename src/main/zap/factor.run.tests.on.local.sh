@@ -1,11 +1,11 @@
-# created by the factor : Dec 11, 2023, 5:57:49 AM  
+# created by the factor : Dec 11, 2023, 6:10:51 PM  
 #!/bin/sh
 set -x
 
 # in Mac Os please make sure to use or to install coreutils: 
 # https://apple.stackexchange.com/questions/135742/time-in-milliseconds-since-epoch-in-the-terminal
 # PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-LocalDateTimeNow=$(date +'%Y-%m-%dT%H:%M:%S.%6N')
+LocalDateTimeNow=$(date +'%Y-%m-%dT%H-%M-%S.%6N')
 # UNIQUE=$(date +'%Y%m%dT%H%M%S%6N')
 
 SCRIPTDIR=$(dirname "$(readlink -f "$0")")

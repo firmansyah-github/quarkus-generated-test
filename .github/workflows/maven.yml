@@ -1,4 +1,4 @@
-# created by the factor : Dec 11, 2023, 6:17:17 AM  
+# created by the factor : Dec 11, 2023, 6:10:51 PM  
 name: Factor CI Workflow
 
 on:
@@ -40,13 +40,4 @@ jobs:
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
-          
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: my-artifacts
-          path: |
-            ./target/k6/reports/
-            ./target/postman/reports/
-            ./target/zap/
 

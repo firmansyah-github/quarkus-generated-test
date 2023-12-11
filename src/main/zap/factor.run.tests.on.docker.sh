@@ -1,11 +1,11 @@
-# created by the factor : Dec 11, 2023, 5:57:49 AM  
+# created by the factor : Dec 11, 2023, 6:10:51 PM  
 #!/bin/sh
 set -x
 
 # in Mac Os please make sure to use or to install coreutils: 
 # https://apple.stackexchange.com/questions/135742/time-in-milliseconds-since-epoch-in-the-terminal
 # PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-LocalDateTimeNow=$(date +'%Y-%m-%dT%H:%M:%S.%6N')
+LocalDateTimeNow=$(date +'%Y-%m-%dT%H-%M-%S.%6N')
 # UNIQUE=$(date +'%Y%m%dT%H%M%S%6N')
 
 # Capture the IP address of the en0 interface
@@ -44,7 +44,7 @@ docker run --rm  -v $script_dir/../../../target/zap:/zap/wrk/:rw -t ghcr.io/zapr
 
 # ZAP - Full Scan  
 #docker run --rm  -v $script_dir/../../../target/zap:/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:$IMGTYPE zap-full-scan.py \
-#    -t $APIURLVAR -g full-gen.conf -r rep.full.$HTMLREPORT -w rep.full.$MDREPORT -x rep.full.$XMLREPORT -J rep.full.$JSONREPORT 
+#   -t $APIURLVAR -g full-gen.conf -r rep.full.$HTMLREPORT -w rep.full.$MDREPORT -x rep.full.$XMLREPORT -J rep.full.$JSONREPORT 
     
 #ZAP - API Scan
 #-f format         openapi, soap, or graphql

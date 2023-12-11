@@ -1,4 +1,4 @@
-# created by the factor : Dec 11, 2023, 5:57:49 AM  
+# created by the factor : Dec 11, 2023, 6:10:51 PM  
 #!/bin/bash
 # docker run --name Postgres-test -e POSTGRES_PASSWORD=xWmGrW0hi4 -p 5432:5432 -d postgres
 
