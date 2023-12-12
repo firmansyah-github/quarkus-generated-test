@@ -11,7 +11,10 @@ response=$(curl -s -X POST "$API_URL" \
 -F "file=@$FILE_PATH")
 
 # Extract the 'id' attribute using jq
-appId=$(echo "$response" | jq -r '.id')
+#appId=$(echo "$response" | jq -r '.id')
+# Extract the 'appId' attribute using grep, cut, and tr
+appId=$(echo "$response" | grep -o '"id":[0-9]*' | cut -d':' -f2 | tr -d '"')
+
 
 # Output the extracted 'appId'
 echo "The extracted appId is: $appId"
