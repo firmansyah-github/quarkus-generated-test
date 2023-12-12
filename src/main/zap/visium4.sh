@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -x
 # Set the necessary variables
 API_KEY="xmOo8Z5tp6.d9DQNq6nhbC9vxy2tDr32tfVBxUl6wKhpxSAiHtE"
 FILE_PATH="/var/jenkins_home/workspace/visium/Simple_Notepad_2.0.1_Apkpure.apk"
@@ -13,7 +13,8 @@ response=$(curl -s -X POST "$API_URL" \
 # Extract the 'id' attribute using jq
 #appId=$(echo "$response" | jq -r '.id')
 # Extract the 'appId' attribute using grep, cut, and tr
-appId=$(echo "$response" | grep -o '"id":[0-9]*' | cut -d':' -f2 | tr -d '"')
+#appId=$(echo "$response" | grep -o '"id":[0-9]*' | cut -d':' -f2 | tr -d '"')
+appId=$(echo "$response" | grep -o '"id" : [0-9]*' | cut -d':' -f2 | tr -d ' ')
 
 
 # Output the extracted 'appId'
