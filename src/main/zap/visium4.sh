@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Set the necessary variables
+API_KEY="xmOo8Z5tp6.d9DQNq6nhbC9vxy2tDr32tfVBxUl6wKhpxSAiHtE"
+FILE_PATH="/var/jenkins_home/workspace/visium/Simple_Notepad_2.0.1_Apkpure.apk"
+API_URL="https://farmdemo.visiumlabs.com/api/v1/apps"
+
+# Make the POST request and capture the response
+response=$(curl -s -X POST "$API_URL" \
+-H "X-VisiumFarm-Api-Key: $API_KEY" \
+-F "file=@$FILE_PATH")
+
+# Extract the 'id' attribute using jq
+appId=$(echo "$response" | jq -r '.id')
+
+# Output the extracted 'appId'
+echo "The extracted appId is: $appId"
