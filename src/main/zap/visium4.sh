@@ -19,3 +19,20 @@ appId=$(echo "$response" | grep -o '"id" : [0-9]*' | cut -d':' -f2 | tr -d ' ')
 
 # Output the extracted 'appId'
 echo "The extracted appId is: $appId"
+
+
+curl -X POST https://farmdemo.visiumlabs.com/api/apk/install \
+-H "Content-Type: application/json" \
+-H "X-VisiumFarm-Api-Key: xmOo8Z5tp6.d9DQNq6nhbC9vxy2tDr32tfVBxUl6wKhpxSAiHtE" \
+-d '{
+  "appList": [
+    {
+      "appId": $appId,
+      "type": "Android"
+    }
+  ],
+  "deviceList": [
+    "9321f298"
+  ]
+}'
+
