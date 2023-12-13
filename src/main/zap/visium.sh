@@ -29,7 +29,8 @@ response=$(curl -s -X GET https://farmdemo.visiumlabs.com/api/devices?os=Android
 
 # Extract the 'id' attributes from the JSON response and format output with double quotes
 # ids=$(echo "$response" | jq -r '.[].deviceId' | awk '{ printf("\"%d\", ", $1) }' | sed 's/, $//')
-ids=$(echo "$json" | jq -r '.[].deviceId' | sed 's/^/"/; s/$/"/')
+ids=$(echo "$response" | jq -r '.[].deviceId' | sed 's/^/"/; s/$/"/')
+
 
 # Output the extracted 'id' attributes in the required format
 echo "$ids"
