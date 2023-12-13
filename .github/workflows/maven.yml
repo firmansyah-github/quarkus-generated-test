@@ -49,3 +49,4 @@ jobs:
             ./target/k6/
             ./target/postman/reports/
             ./target/zap/
+            ./target/surefire-reports
