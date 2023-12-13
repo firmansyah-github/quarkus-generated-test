@@ -164,14 +164,17 @@ json_data='[
 #ids=$(echo "$json_data" | jq -r '.[] | .id')
 # Extract 'id' attribute from each JSON object and format output
 #ids=$(echo "$json_data" | jq -r '.[].id' | paste -sd "," -)
-ids=$(echo "$json_data" | jq -r '.[].id' | awk '{ printf("\"%d\", ", $1) }' | sed 's/, $//')
+#ids=$(echo "$json_data" | jq -r '.[].id' | awk '{ printf("\"%d\", ", $1) }' | sed 's/, $//')
+ids=$(echo "$json_data" | jq -r '.[].deviceId' | sed 's/^/"/; s/$/"/')
+ids0=$(echo "$json_data" | jq -r '.[].deviceId' | awk '{ printf("\"%d\", ", $1) }' | sed 's/^/"/; s/$/"/')
+
+
 
 # Output the extracted 'id' attributes in the required format
 #echo "$ids"
 
 # Output the extracted 'id' attributes in the required format
 echo "$ids"
+echo "$ids0"
 
-# Output the extracted IDs
-echo "Extracted IDs:"
-echo "$ids"
+
