@@ -7,8 +7,8 @@ if ! command -v jq &> /dev/null; then
     echo "jq is not installed. Installing..."
     
     # Update package lists and install jq
-    sudo apt-get update
-    sudo apt-get install -y jq
+    apt-get update
+    apt-get install -y jq
 
     # Check installation success
     if command -v jq &> /dev/null; then
