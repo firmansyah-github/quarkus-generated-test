@@ -10,7 +10,7 @@ curl -X POST https://farmdemo.visiumlabs.com/api/apk/install \
 -d '{
   "appList": [
     {
-      "appId": $appId,
+      "appId": '"$appId"', 
       "type": "Android"
     }
   ],
