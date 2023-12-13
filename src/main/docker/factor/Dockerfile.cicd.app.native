@@ -1,4 +1,4 @@
-# created by the factor : Dec 13, 2023, 5:45:39 AM  
+# created by the factor : Dec 14, 2023, 5:46:43 AM  
 ####
 # This Dockerfile is used in order to build a container that runs the Quarkus application in native (no JVM) mode.
 #
@@ -52,6 +52,7 @@ RUN ./mvnw package -Pnative -DskipTests
 FROM quay.io/quarkus/quarkus-micro-image:2.0 AS native
 WORKDIR /work/
 COPY --from=package /code/target/*-runner /work/application
+COPY --from=test /code/target/surefire-reports /work/target/surefire-reports
 
 # set up permissions for user `1001`
 RUN chmod 775 /work /work/application \
