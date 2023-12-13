@@ -1,6 +1,26 @@
-# created by the factor : Dec 11, 2023, 6:10:51 PM  
 #!/bin/bash
 set -x
+
+# step 1: check and install jq
+# Check if jq is installed
+if ! command -v jq &> /dev/null; then
+    echo "jq is not installed. Installing..."
+    
+    # Update package lists and install jq
+    sudo apt-get update
+    sudo apt-get install -y jq
+
+    # Check installation success
+    if command -v jq &> /dev/null; then
+        echo "jq has been successfully installed."
+    else
+        echo "Failed to install jq. Please install it manually."
+    fi
+else
+    echo "jq is already installed."
+fi
+
+
 # Set the necessary variables
 API_KEY="xmOo8Z5tp6.d9DQNq6nhbC9vxy2tDr32tfVBxUl6wKhpxSAiHtE"
 FILE_PATH="/var/jenkins_home/workspace/visium/Simple_Notepad_2.0.1_Apkpure.apk"
