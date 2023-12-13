@@ -4,7 +4,7 @@ pipeline {
         stage('Call API') {
             steps {
                 sh './src/main/zap/visium.sh'
-                sh './src/main/zap/visium2.sh'
+                //sh './src/main/zap/visium2.sh'
             }
         }
     }
