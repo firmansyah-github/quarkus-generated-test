@@ -1,4 +1,4 @@
-# created by the factor : Dec 14, 2023, 5:46:43 AM  
+# created by the factor : Dec 14, 2023, 6:48:50 AM  
 version: '3'
 services:
   app:
@@ -14,7 +14,8 @@ services:
       SW_AGENT_INSTANCE_NAME: quarkus-1
       SW_JDBC_TRACE_SQL_PARAMETERS: 'true'
     volumes:
-      - ../../../../target/surefire-reports:/work/target/surefire-reports
+      - ../../../../target/surefire-reports:/work/target/surefire-reports-mounted
+    command: sh -c "cp -r /work/target/surefire-reports/* /work/target/surefire-reports-mounted && ./application -Dquarkus.http.host=0.0.0.0"
     ports:
       - "8080:8080"
     networks:
