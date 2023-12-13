@@ -1,0 +1,46 @@
+// created by the factor : Dec 14, 2023, 6:54:47 AM  
+pipeline {
+    agent any
+    
+    environment {
+        DOCKERHUB_CREDENTIALS_FACTOR = 'firmansyahprofess-dockerhub-id'
+    }
+
+    stages {
+        //stage('Checkout') {
+        //    steps {
+        //        // Cloning the repository
+        //        git branch: 'master', url: 'https://github.com/firmansyah-github/quarkus-generated-test.git'
+        //    }
+        //}
+
+        stage('Run Script') {
+            steps {
+                // Granting executable permissions to the script
+                sh 'chmod +x ./src/main/docker/factor/integrated.cicd.native.sh'
+                
+                // Granting executable permissions to the script
+                sh 'chmod +x ./mvnw'
+                
+                // create directory target for postman, k6, and zap
+                sh 'mkdir -p ./target/k6/reports'
+                sh 'mkdir -p ./target/postman/reports'
+                sh 'mkdir -p ./target/zap'
+                
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'firmansyahprofess-dockerhub-id', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USER')]) {
+                        sh "export DOCKER_PASSWORD='\${DOCKER_PASSWORD}'"
+                        sh "export DOCKER_USER='\${DOCKER_USER}'"
+                        sh "./src/main/docker/factor/integrated.cicd.native.sh"
+                    }
+                }
+                
+               
+            }
+        }
+        
+        // Add more stages as needed for your pipeline
+    }
+    
+    // Post-build actions or additional configurations can be added here
+}

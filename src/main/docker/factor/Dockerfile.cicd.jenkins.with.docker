@@ -1,0 +1,48 @@
+# created by the factor : Dec 14, 2023, 6:54:47 AM  
+
+# docker build -f src/main/docker/factor/Dockerfile.cicd.jenkins.with.docker -t factor-jenkins-docker .
+
+# create directory in the host for container docker of k6, postman, and zap can mount, read and write the files that required
+# sudo mkdir -p /var/jenkins_home
+# sudo chmod ugo+w /var/jenkins_home
+
+# modify volume mounted, below is for MacOs or Linux based OS
+# docker run -it -p 8081:8080 -p 50000:50000 -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home:/var/jenkins_home -e JAVA_OPTS="-Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400" factor-jenkins-docker
+        
+# firmansyahprofess/factor-jenkins-docker
+# https://linuxiac.com/how-to-install-docker-on-debian-12-bookworm/
+# https://hackmamba.io/blog/2022/04/running-docker-in-a-jenkins-container/
+# How to Install Docker on Debian 12 (Bookworm)
+FROM jenkins/jenkins:lts
+
+USER root
+
+# Step 1: Install Prerequisites
+RUN apt update && \
+    apt install apt-transport-https ca-certificates curl gnupg
+
+# Step 2: Add Docker’s GPG Repo Key
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker.gpg
+
+# Step 3: Add the Docker Repo to Debian 12
+RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/debian bookworm stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Next, refresh the package list.
+RUN apt update
+
+# Step 4: Install Docker on Debian 12 (Bookworm)
+
+RUN apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin
+
+
+# Step 5: Install Docker Compose v2.23.3
+RUN curl -fsSL https://github.com/docker/compose/releases/download/v2.23.3/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+RUN chmod +x /usr/local/bin/docker-compose
+
+
+RUN usermod -aG docker jenkins
+
+
+
+
+
