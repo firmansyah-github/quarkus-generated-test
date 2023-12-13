@@ -167,6 +167,8 @@ json_data='[
 #ids=$(echo "$json_data" | jq -r '.[].id' | awk '{ printf("\"%d\", ", $1) }' | sed 's/, $//')
 ids=$(echo "$json_data" | jq -r '.[].deviceId' | sed 's/^/"/; s/$/"/')
 ids0=$(echo "$json_data" | jq -r '.[].deviceId' | awk '{ printf("\"%d\", ", $1) }' | sed 's/^/"/; s/$/"/')
+device_ids=$(echo "$json_data" | jq -r '[.[] | .deviceId] | map("\"" + . + "\"") | join(",")')
+
 
 
 
@@ -176,5 +178,7 @@ ids0=$(echo "$json_data" | jq -r '.[].deviceId' | awk '{ printf("\"%d\", ", $1) 
 # Output the extracted 'id' attributes in the required format
 echo "$ids"
 echo "$ids0"
+
+echo "$device_ids"
 
 
