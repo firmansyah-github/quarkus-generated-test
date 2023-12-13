@@ -2,7 +2,8 @@
 #!/bin/bash
 set -x
 
-
+echo "$appId"
+echo $appId
 
 curl -X POST https://farmdemo.visiumlabs.com/api/apk/install \
 -H "Content-Type: application/json" \
