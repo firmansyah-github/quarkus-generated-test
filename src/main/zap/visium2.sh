@@ -1,8 +1,8 @@
 # created by the factor : Dec 11, 2023, 6:10:51 PM  
-#!/bin/sh
+#!/bin/bash
 set -x
 
-#!/bin/bash
+
 
 curl -X POST https://farmdemo.visiumlabs.com/api/apk/install \
 -H "Content-Type: application/json" \
@@ -10,7 +10,7 @@ curl -X POST https://farmdemo.visiumlabs.com/api/apk/install \
 -d '{
   "appList": [
     {
-      "appId": 3623201,
+      "appId": $appId,
       "type": "Android"
     }
   ],
