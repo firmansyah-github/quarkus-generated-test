@@ -168,7 +168,8 @@ json_data='[
 ids=$(echo "$json_data" | jq -r '.[].deviceId' | sed 's/^/"/; s/$/"/')
 ids0=$(echo "$json_data" | jq -r '.[].deviceId' | awk '{ printf("\"%d\", ", $1) }' | sed 's/^/"/; s/$/"/')
 device_ids=$(echo "$json_data" | jq -r '[.[] | .deviceId] | map("\"" + . + "\"") | join(",")')
-
+# ids=$(echo "$response" | jq -r '.[].deviceId' | awk '{ printf("\"%d\", ", $1) }' | sed 's/, $//')
+#ids=$(echo "$response" | jq -r '.[].deviceId' | sed 's/^/"/; s/$/"/')
 
 
 
