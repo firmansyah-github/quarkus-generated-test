@@ -30,6 +30,8 @@ jobs:
           chmod -R oug+rw ./target/postman/reports/
           mkdir -p ./target/zap
           chmod -R oug+rw ./target/zap/
+          mkdir -p ./target/surefire-reports
+          chmod -R oug+rw ./target/surefire-reports
           
           
       - name: Run Script
