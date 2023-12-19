@@ -1,4 +1,4 @@
-// created by the factor : Dec 14, 2023, 6:54:47 AM  
+// created by the factor : Dec 16, 2023, 2:00:56 PM  
 pipeline {
     agent any
     
@@ -27,7 +27,6 @@ pipeline {
                 sh 'mkdir -p ./target/postman/reports'
                 sh 'mkdir -p ./target/zap'
                 sh 'mkdir -p ./target/surefire-reports'
-                
                 
                 script {
                     withCredentials([usernamePassword(credentialsId: 'firmansyahprofess-dockerhub-id', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USER')]) {

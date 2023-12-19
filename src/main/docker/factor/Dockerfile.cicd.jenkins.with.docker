@@ -1,4 +1,4 @@
-# created by the factor : Dec 14, 2023, 6:54:47 AM  
+# created by the factor : Dec 16, 2023, 2:00:56 PM  
 
 # docker build -f src/main/docker/factor/Dockerfile.cicd.jenkins.with.docker -t factor-jenkins-docker .
 

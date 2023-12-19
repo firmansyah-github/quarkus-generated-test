@@ -1,4 +1,4 @@
-// created by the factor : Dec 11, 2023, 6:10:51 PM  
+// created by the factor : Dec 17, 2023, 6:05:00 PM  
 package firmansyah.infrastructure.repository.hibernate.panache;
 
 import java.util.LinkedHashMap;
@@ -132,7 +132,7 @@ public class FollowRelationshipRepositoryPanache extends AbstractPanacheReposito
             queryBuilder = findAll(sort);
         }
         
-        if (queryCondition.toString().isEmpty() && sort == null) {
+        if (queryBuilder == null && queryCondition.toString().isEmpty() && sort == null) {
         	queryBuilder = findAll();
         }
 

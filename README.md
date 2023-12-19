@@ -1,4 +1,4 @@
-# created by the factor : Dec 11, 2023, 6:10:51 PM  
+# created by the factor : Dec 17, 2023, 6:05:00 PM  
 # ![RealWorld Example App](quarkus-logo.png)
 
 > ### Quarkus Framework codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
@@ -470,7 +470,7 @@ export DOCKER_USER=factordeveloperpublic
 docker build -f src/main/docker/factor/Dockerfile.cicd.jenkins.with.docker -t factor-jenkins-docker .
 ```
 
-2. Create directory in the host for container docker of k6, postman, and zap, so the container can mount, read and write the files that required
+2. Create directory in the host for container docker of Jenkins, so the container can mount, read and write the files that required
 ```shell
 sudo mkdir -p /var/jenkins_home
 sudo chmod ugo+w /var/jenkins_home
@@ -491,6 +491,34 @@ docker run -it \
   --cpu-shares=1024 \
   factor-jenkins-docker
 ```
+
+4. Configuring your Jenkins environment (Skip if already configured):
+   a. Go to localhost:8081
+   b. Get the admin password from the log returned and login
+   c. In the following prompt, select Install suggested plugins and Docker Plugin. Jenkins will automatically install all plugins the Jenkins community finds most useful.
+   d. After the installation, create a first admin user and finish the configuration.
+
+5. Create a New Jenkins Pipeline:
+   a. Click on "New Item" on the Jenkins dashboard.
+   b. Enter a name for your project (e.g., Quarkus-Pipeline) and select "Pipeline" as the type.
+   c. Click "OK" to create the pipeline.
+   d. Configure Pipeline Settings:
+      1. Scroll down to the "Pipeline" section and choose "Pipeline script from SCM" as the Definition.
+      2. Select Git as the SCM.
+      3. Enter the GitHub repository URL (https://github.com/firmansyah-github/quarkus-generated-test.git) in the Repository URL field.
+      4. Set the appropriate credentials for accessing the repository.
+      5. Specify the branch to build (e.g., main, master).
+      6. Specify Jenkinsfile Path:
+         a. In the "Script Path" field, enter the path to your Jenkinsfile relative to the repository root:
+            src/main/docker/factor/Jenkinsfile.cicd.jenkins.with.docker
+         b. Save the Pipeline Configuration:
+   e. Click "Save" to save the pipeline configuration.
+
+6. Run the Pipeline:
+   a. Go back to the Jenkins dashboard and locate your newly created pipeline project.
+   b. Click "Build Now" or trigger the pipeline manually to start the build process.
+   c. Jenkins will retrieve the source code from the specified GitHub repository and execute the pipeline steps defined in the Jenkinsfile located at the provided path.
+   d. Ensure that your Jenkinsfile (Jenkinsfile.cicd.jenkins.with.docker) contains the necessary stages, steps, and Docker-related configurations to build and deploy the Quarkus application according to your requirements.
 
 #### Database changes can be made to the application.properties file.
 
