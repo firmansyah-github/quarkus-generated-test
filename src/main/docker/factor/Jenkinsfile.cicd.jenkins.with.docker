@@ -1,18 +1,8 @@
-// created by the factor : Dec 16, 2023, 2:00:56 PM  
+// created by the factor : Dec 20, 2023, 7:09:46 AM  
 pipeline {
     agent any
-    
-    environment {
-        DOCKERHUB_CREDENTIALS_FACTOR = 'firmansyahprofess-dockerhub-id'
-    }
 
     stages {
-        //stage('Checkout') {
-        //    steps {
-        //        // Cloning the repository
-        //        git branch: 'master', url: 'https://github.com/firmansyah-github/quarkus-generated-test.git'
-        //    }
-        //}
 
         stage('Run Script') {
             steps {

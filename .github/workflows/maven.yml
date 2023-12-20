@@ -1,4 +1,4 @@
-# created by the factor : Dec 11, 2023, 8:42:20 PM  
+# created by the factor : Dec 20, 2023, 7:10:58 AM  
 name: Factor CI Workflow
 
 on:
@@ -51,4 +51,3 @@ jobs:
             ./target/k6/
             ./target/postman/reports/
             ./target/zap/
-            ./target/surefire-reports
