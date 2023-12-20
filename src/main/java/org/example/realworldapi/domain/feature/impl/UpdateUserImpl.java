@@ -1,4 +1,4 @@
-// modify by the factor : Dec 7, 2023, 4:02:02 PM  
+// modify by the factor : Jan 29, 2024, 10:04:05 AM  
 package org.example.realworldapi.domain.feature.impl;
 
 import lombok.AllArgsConstructor;
@@ -6,6 +6,7 @@ import org.example.realworldapi.domain.feature.FindUserById;
 import org.example.realworldapi.domain.feature.UpdateUser;
 import org.example.realworldapi.domain.exception.EmailAlreadyExistsException;
 import org.example.realworldapi.domain.exception.UsernameAlreadyExistsException;
+import org.example.realworldapi.domain.model.provider.HashProvider;
 import org.example.realworldapi.domain.model.user.UpdateUserInput;
 import org.example.realworldapi.domain.model.user.User;
 import org.example.realworldapi.domain.model.user.UserRepository;
@@ -19,6 +20,7 @@ public class UpdateUserImpl implements UpdateUser {
   private final FindUserById findUserById;
   private final UserRepository userRepository;
   private final ModelValidator modelValidator;
+  private final HashProvider hashProvider;
 
   @Override
   public User handle(UpdateUserInput updateUserInput) {
@@ -44,6 +46,10 @@ public class UpdateUserImpl implements UpdateUser {
 
     if (isPresent(updateUserInput.getImage())) {
       user.setImage(updateUserInput.getImage());
+    }
+    
+    if (isPresent(updateUserInput.getPassword())) {
+      user.setPassword(hashProvider.hashPassword(updateUserInput.getPassword()));
     }
   }
 

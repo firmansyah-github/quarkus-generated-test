@@ -1,4 +1,4 @@
-// modify by the factor : Dec 7, 2023, 4:02:02 PM  
+// modify by the factor : Jan 29, 2024, 10:04:05 AM  
 package org.example.realworldapi.application.web.model.request;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -25,10 +25,11 @@ public class UpdateUserRequest {
 
     private String bio;
     private String image;
+    private String password;
     @Email
     private String email;
 
     public UpdateUserInput toUpdateUserInput(String userId) {
-        return new UpdateUserInput(userId, this.username, this.bio, this.image, this.email);
+        return new UpdateUserInput(userId, this.username, this.bio, this.image, this.email, this.password);
     }
 }

@@ -26,8 +26,8 @@ public class UsersConfiguration {
   @Produces
   @Singleton
   public UpdateUser updateUser(
-      FindUserById findUserById, UserRepository userRepository, ModelValidator modelValidator) {
-    return new UpdateUserImpl(findUserById, userRepository, modelValidator);
+      FindUserById findUserById, UserRepository userRepository, ModelValidator modelValidator,HashProvider hashProvider) {
+    return new UpdateUserImpl(findUserById, userRepository, modelValidator, hashProvider);
   }
 
   @Produces

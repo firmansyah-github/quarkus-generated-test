@@ -1,4 +1,4 @@
-# modify by the factor : Dec 11, 2023, 6:10:51 PM  
+# modify by the factor : Jan 29, 2024, 10:05:08 AM  
 #### 1. Docker Quarkus application in JVM mode
 # 1. This Dockerfile is used in order to build a container that runs the Quarkus application in JVM mode
 # 2. Before building the docker image run:

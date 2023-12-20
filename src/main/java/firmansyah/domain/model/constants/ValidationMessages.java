@@ -1,5 +1,5 @@
-// created by the factor : Dec 11, 2023, 6:10:51 PM  
-// modify by the factor : Dec 11, 2023, 6:10:51 PM  
+// created by the factor : Jan 29, 2024, 10:05:08 AM  
+// modify by the factor : Jan 29, 2024, 10:05:08 AM  
 package firmansyah.domain.model.constants;
 
 public class ValidationMessages {

@@ -1,4 +1,4 @@
-// created by the factor : Dec 11, 2023, 6:10:51 PM  
+// created by the factor : Jan 29, 2024, 10:05:08 AM  
 package firmansyah.domain.exception;
 
 public class FavoriteRelationshipAlreadyExistsException extends BusinessException {
