@@ -1,4 +1,4 @@
-// modify by the factor : Jan 29, 2024, 10:04:05 AM  
+// modify by the factor : Feb 13, 2024, 4:06:34 PM  
 package org.example.realworldapi.application.web.resource;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -105,14 +105,18 @@ public class ArticlesResource {
         .build();
   }
 
+  
   @GET
   @Path("/{slug}")
   @Produces(MediaType.APPLICATION_JSON)
+  @Secured(optional = true)
   public Response findBySlug(
       @PathParam("slug") @NotBlank(message = ValidationMessages.SLUG_MUST_BE_NOT_BLANK)
-          String slug) {
+          String slug,
+          @Context SecurityContext securityContext) {
+	final var loggedUserId = resourceUtils.getLoggedUserId(securityContext);
     final var article = findArticleBySlug.handle(slug);
-    return Response.ok(resourceUtils.articleResponse(article, null))
+    return Response.ok(resourceUtils.articleResponse(article, loggedUserId))
         .status(Response.Status.OK)
         .build();
   }

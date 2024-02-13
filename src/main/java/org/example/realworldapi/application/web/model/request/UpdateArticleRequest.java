@@ -1,4 +1,4 @@
-// modify by the factor : Jan 29, 2024, 10:04:05 AM  
+// modify by the factor : Feb 13, 2024, 4:06:34 PM  
 package org.example.realworldapi.application.web.model.request;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -6,6 +6,9 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
+
 import org.example.realworldapi.domain.model.article.UpdateArticleInput;
 import org.example.realworldapi.infrastructure.web.validation.constraint.AtLeastOneFieldMustBeNotNull;
 
@@ -24,8 +27,10 @@ public class UpdateArticleRequest {
   private String description;
 
   private String body;
+  
+  private List<String> tagList;
 
   public UpdateArticleInput toUpdateArticleInput(String authorId, String slug) {
-    return new UpdateArticleInput(authorId, slug, this.title, this.description, this.body);
+    return new UpdateArticleInput(authorId, slug, this.title, this.description, this.body, this.tagList);
   }
 }

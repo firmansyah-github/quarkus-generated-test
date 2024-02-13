@@ -38,5 +38,12 @@ public class TagRelationshipRepositoryPanache
         .stream()
         .map(entityUtils::tag)
         .collect(Collectors.toList());
-  }
+    }
+
+	@Override
+	public void deleteTagsByArticle(Article article) {
+		// TODO Auto-generated method stub
+		delete("from TagRelationshipEntity as tagRelationship where tagRelationship.primaryKey.article.id = :articleId",
+				Parameters.with("articleId", article.getId()));
+	}
 }

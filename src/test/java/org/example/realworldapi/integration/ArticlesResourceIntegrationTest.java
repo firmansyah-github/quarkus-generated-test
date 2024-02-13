@@ -11,7 +11,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import jakarta.ws.rs.core.MediaType;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.example.realworldapi.constants.TestConstants.*;
@@ -460,6 +463,59 @@ public class ArticlesResourceIntegrationTest extends AbstractIntegrationTest {
             is(updateArticleRequest.getBody()));
 
     final var updatedArticleEntity = findArticleEntityById(article.getId());
+
+    Assertions.assertEquals(updateArticleRequest.getTitle(), updatedArticleEntity.getTitle());
+    Assertions.assertEquals(
+        updateArticleRequest.getDescription(), updatedArticleEntity.getDescription());
+    Assertions.assertEquals(updateArticleRequest.getBody(), updatedArticleEntity.getBody());
+  }
+  
+  @Test
+  public void
+      givenExistentArticle_whenExecuteUpdateArticleTagListEndpoint_shouldReturnUpdatedArticleWithStatusCode200()
+          throws JsonProcessingException {
+    final var loggedUser =
+        createUserEntity("loggedUser", "loggeduser@mail.com", "bio", "image", "loggeduser123");
+    final var article = createArticles(loggedUser, "Title", "Description", "Body", 1);
+
+    final var tag1 = createTagEntity("Tag 1");
+
+    final var tag2 = createTagEntity("Tag 2");
+
+    createArticlesTags(article, tag1, tag2);
+
+    final var updateArticleRequest = new UpdateArticleRequest();
+    updateArticleRequest.setTitle("updated title");
+    updateArticleRequest.setDescription("updated description");
+    updateArticleRequest.setBody("updated body");
+    List<String> lsTagUpdate = new ArrayList<>();
+    lsTagUpdate.add("Tag 1");
+    lsTagUpdate.add("Tag 3");
+    lsTagUpdate.add("Tag 4");
+    updateArticleRequest.setTagList(lsTagUpdate);
+
+    given()
+        .contentType(MediaType.APPLICATION_JSON)
+        .header(AUTHORIZATION_HEADER, AUTHORIZATION_HEADER_VALUE_PREFIX + token(loggedUser))
+        .body(objectMapper.writeValueAsString(updateArticleRequest))
+        .pathParam("slug", article.get(0).getSlug())
+        .put(ARTICLES_PATH + "/{slug}")
+        .then()
+        .statusCode(HttpStatus.SC_OK)
+        .body(
+            "article.title",
+            is(updateArticleRequest.getTitle()),
+            "article.description",
+            is(updateArticleRequest.getDescription()),
+            "article.tagList.size()",
+            is(lsTagUpdate.size()),
+            "article.tagList",
+            hasItems("Tag 4","Tag 3","Tag 1"),
+            "article.body",
+            is(updateArticleRequest.getBody()));
+    
+
+    final var updatedArticleEntity = findArticleEntityById(article.get(0).getId());
 
     Assertions.assertEquals(updateArticleRequest.getTitle(), updatedArticleEntity.getTitle());
     Assertions.assertEquals(

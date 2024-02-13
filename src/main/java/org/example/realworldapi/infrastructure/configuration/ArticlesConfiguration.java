@@ -40,9 +40,12 @@ public class ArticlesConfiguration {
       FindArticleBySlug findArticleBySlug,
       CreateSlugByTitle createSlugByTitle,
       ArticleRepository articleRepository,
-      ModelValidator modelValidator) {
+      ModelValidator modelValidator,
+      TagRelationshipRepository tagRelationshipRepository, 
+      FindTagsByNameCreateIfNotExists findTagsByNameCreateIfNotExists)
+  {
     return new UpdateArticleBySlugImpl(
-        findArticleBySlug, createSlugByTitle, articleRepository, modelValidator);
+        findArticleBySlug, createSlugByTitle, articleRepository, modelValidator, tagRelationshipRepository, findTagsByNameCreateIfNotExists);
   }
 
   @Produces

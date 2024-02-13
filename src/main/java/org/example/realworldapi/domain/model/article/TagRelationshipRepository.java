@@ -8,4 +8,6 @@ public interface TagRelationshipRepository {
   void save(TagRelationship tagRelationship);
 
   List<Tag> findArticleTags(Article article);
+
+  void deleteTagsByArticle(Article article);
 }

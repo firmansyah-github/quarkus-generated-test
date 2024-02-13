@@ -1,5 +1,7 @@
-// modify by the factor : Jan 29, 2024, 10:04:05 AM  
+// modify by the factor : Feb 13, 2024, 4:06:34 PM  
 package org.example.realworldapi.domain.model.article;
+
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,4 +16,5 @@ public class UpdateArticleInput {
   private final String title;
   private final String description;
   private final String body;
+  private final List<String> tagList;
 }
