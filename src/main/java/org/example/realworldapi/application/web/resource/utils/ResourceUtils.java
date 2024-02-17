@@ -37,7 +37,7 @@ public class ResourceUtils {
 
   public ArticleResponse articleResponse(Article article, String loggedUserId) {
     final var author = article.getAuthor();
-    final var profileResponse = profileResponse(author.getUsername(), author.getId());
+    final var profileResponse = profileResponse(author.getUsername(), loggedUserId);//author.getId());
     final var tags = findArticleTags.handle(article);
     final var favoritesCount = articleFavoritesCount.handle(article.getId());
     final var articleResponse = new ArticleResponse(article, profileResponse, favoritesCount, tags);
