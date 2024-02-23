@@ -1,4 +1,4 @@
-// modify by the factor : Feb 13, 2024, 4:06:34 PM  
+// modify by the factor : Feb 22, 2024, 10:16:04 PM  
 package org.example.realworldapi.infrastructure.repository.hibernate.panache;
 
 import io.quarkus.panache.common.Page;
@@ -74,7 +74,8 @@ public class ArticleRepositoryPanache extends AbstractPanacheRepository<ArticleE
                 "select articles from ArticleEntity as articles inner join articles.author as author inner join author.followedBy as followedBy where followedBy.user.id = :loggedUserId",
                 Sort.descending("createdAt").and("updatedAt").descending(),
                 Parameters.with("loggedUserId", articleFilter.getLoggedUserId()))
-            .page(Page.of(articleFilter.getOffset(), articleFilter.getLimit()))
+            //.page(Page.of(articleFilter.getOffset(), articleFilter.getLimit()))
+            .range(articleFilter.getOffset(), articleFilter.getOffset()+articleFilter.getLimit()-1)
             .list();
     final var articlesResult =
         articlesEntity.stream().map(entityUtils::article).collect(Collectors.toList());

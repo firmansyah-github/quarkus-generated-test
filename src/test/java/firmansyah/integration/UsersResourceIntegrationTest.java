@@ -1,4 +1,4 @@
-// created by the factor : Feb 13, 2024, 4:07:53 PM  
+// created by the factor : Feb 23, 2024, 6:45:32 AM  
 package firmansyah.integration;
 
 import static io.restassured.RestAssured.given;
@@ -547,11 +547,11 @@ public class UsersResourceIntegrationTest extends ResourcesIntegrationTest {
 	}
 	
 	@Test
-	public void given10Users_whenExecuteFindUsersByFilterWithOffset1AndLimit5_shouldReturnListOf5Users() {
+	public void given15Users_whenExecuteFindUsersByFilterWithOffset10AndLimit5_shouldReturnListOf5Users() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
-	    for (int i = 0; i < 10; i++) {
+	    for (int i = 0; i < 15; i++) {
 	    	createUsers(String.valueOf(i));
 		}
 	   
@@ -559,7 +559,7 @@ public class UsersResourceIntegrationTest extends ResourcesIntegrationTest {
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 1)
+	        .queryParam("offset", 10)
 	        .queryParam("limit", 5)
 	        .get(USERS_RESOURCE_PATH)
 	        .then()
@@ -584,11 +584,11 @@ public class UsersResourceIntegrationTest extends ResourcesIntegrationTest {
 	}
 	
 	@Test
-	public void given10Users_whenExecuteFindUsersByFilterWithOffset2AndLimit5_shouldReturnListOf0Users() {
+	public void given10Users_whenExecuteFindUsersByFilterWithOffset20AndLimit5_shouldReturnListOf0Users() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
-	    for (int i = 0; i < 10; i++) {
+	    for (int i = 0; i < 9; i++) {
 	    	createUsers(String.valueOf(i));
 		}
 	   
@@ -596,7 +596,7 @@ public class UsersResourceIntegrationTest extends ResourcesIntegrationTest {
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 2)
+	        .queryParam("offset", 20)
 	        .queryParam("limit", 5)
 	        .get(USERS_RESOURCE_PATH)
 	        .then()
@@ -604,7 +604,7 @@ public class UsersResourceIntegrationTest extends ResourcesIntegrationTest {
 	        .body(
 					
 					"usersCount",
-					 is(0+1)
+					 is(0)
 				);
 				
 	}
@@ -622,7 +622,7 @@ public class UsersResourceIntegrationTest extends ResourcesIntegrationTest {
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 1)
+	        .queryParam("offset", 10)
 	        .queryParam("limit", 10)
 	        .get(USERS_RESOURCE_PATH)
 	        .then()
@@ -636,11 +636,11 @@ public class UsersResourceIntegrationTest extends ResourcesIntegrationTest {
 	}
 	
 	@Test
-	public void given10Users_whenExecuteFindUsersByFilterWithOffset1AndLimit115_shouldReturnListOf0Users() {
+	public void given10Users_whenExecuteFindUsersByFilterWithOffset10AndLimit115_shouldReturnListOf0Users() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
-	    for (int i = 0; i < 10; i++) {
+	    for (int i = 0; i < 9; i++) {
 	    	createUsers(String.valueOf(i));
 		}
 	   
@@ -648,7 +648,7 @@ public class UsersResourceIntegrationTest extends ResourcesIntegrationTest {
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 1)
+	        .queryParam("offset", 10)
 	        .queryParam("limit", 15)
 	        .get(USERS_RESOURCE_PATH)
 	        .then()

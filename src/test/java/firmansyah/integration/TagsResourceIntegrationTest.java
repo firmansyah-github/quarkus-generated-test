@@ -1,4 +1,4 @@
-// created by the factor : Feb 13, 2024, 4:07:37 PM  
+// created by the factor : Feb 23, 2024, 6:45:22 AM  
 package firmansyah.integration;
 
 import static io.restassured.RestAssured.given;
@@ -431,11 +431,11 @@ public class TagsResourceIntegrationTest extends ResourcesIntegrationTest {
 	}
 	
 	@Test
-	public void given10Tags_whenExecuteFindTagsByFilterWithOffset1AndLimit5_shouldReturnListOf5Tags() {
+	public void given15Tags_whenExecuteFindTagsByFilterWithOffset10AndLimit5_shouldReturnListOf5Tags() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
-	    for (int i = 0; i < 10; i++) {
+	    for (int i = 0; i < 15; i++) {
 	    	createTags(String.valueOf(i));
 		}
 	   
@@ -443,7 +443,7 @@ public class TagsResourceIntegrationTest extends ResourcesIntegrationTest {
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 1)
+	        .queryParam("offset", 10)
 	        .queryParam("limit", 5)
 	        .get(TAGS_RESOURCE_PATH)
 	        .then()
@@ -460,7 +460,7 @@ public class TagsResourceIntegrationTest extends ResourcesIntegrationTest {
 	}
 	
 	@Test
-	public void given10Tags_whenExecuteFindTagsByFilterWithOffset2AndLimit5_shouldReturnListOf0Tags() {
+	public void given10Tags_whenExecuteFindTagsByFilterWithOffset20AndLimit5_shouldReturnListOf0Tags() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
@@ -472,7 +472,7 @@ public class TagsResourceIntegrationTest extends ResourcesIntegrationTest {
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 2)
+	        .queryParam("offset", 20)
 	        .queryParam("limit", 5)
 	        .get(TAGS_RESOURCE_PATH)
 	        .then()
@@ -486,7 +486,7 @@ public class TagsResourceIntegrationTest extends ResourcesIntegrationTest {
 	}
 	
 	@Test
-	public void given10Tags_whenExecuteFindTagsByFilterWithOffset1AndLimit10_shouldReturnListOf0Tags() {
+	public void given10Tags_whenExecuteFindTagsByFilterWithOffset10AndLimit10_shouldReturnListOf0Tags() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
@@ -498,7 +498,7 @@ public class TagsResourceIntegrationTest extends ResourcesIntegrationTest {
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 1)
+	        .queryParam("offset", 10)
 	        .queryParam("limit", 10)
 	        .get(TAGS_RESOURCE_PATH)
 	        .then()
@@ -512,7 +512,7 @@ public class TagsResourceIntegrationTest extends ResourcesIntegrationTest {
 	}
 	
 	@Test
-	public void given10Tags_whenExecuteFindTagsByFilterWithOffset1AndLimit115_shouldReturnListOf0Tags() {
+	public void given10Tags_whenExecuteFindTagsByFilterWithOffset10AndLimit115_shouldReturnListOf0Tags() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
@@ -524,7 +524,7 @@ public class TagsResourceIntegrationTest extends ResourcesIntegrationTest {
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 1)
+	        .queryParam("offset", 10)
 	        .queryParam("limit", 15)
 	        .get(TAGS_RESOURCE_PATH)
 	        .then()

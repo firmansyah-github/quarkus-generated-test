@@ -1,4 +1,4 @@
-// created by the factor : Feb 13, 2024, 4:07:37 PM  
+// created by the factor : Feb 23, 2024, 6:45:22 AM  
 package firmansyah.integration;
 
 import static io.restassured.RestAssured.given;
@@ -667,11 +667,11 @@ public class ArticlesResourceIntegrationTest extends ResourcesIntegrationTest {
 	}
 	
 	@Test
-	public void given10Articles_whenExecuteFindArticlesByFilterWithOffset1AndLimit5_shouldReturnListOf5Articles() {
+	public void given15Articles_whenExecuteFindArticlesByFilterWithOffset10AndLimit5_shouldReturnListOf5Articles() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
-	    for (int i = 0; i < 10; i++) {
+	    for (int i = 0; i < 15; i++) {
 	    	createArticles(String.valueOf(i));
 		}
 	   
@@ -679,7 +679,7 @@ public class ArticlesResourceIntegrationTest extends ResourcesIntegrationTest {
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 1)
+	        .queryParam("offset", 10)
 	        .queryParam("limit", 5)
 	        .get(ARTICLES_RESOURCE_PATH)
 	        .then()
@@ -708,7 +708,7 @@ public class ArticlesResourceIntegrationTest extends ResourcesIntegrationTest {
 	}
 	
 	@Test
-	public void given10Articles_whenExecuteFindArticlesByFilterWithOffset2AndLimit5_shouldReturnListOf0Articles() {
+	public void given10Articles_whenExecuteFindArticlesByFilterWithOffset20AndLimit5_shouldReturnListOf0Articles() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
@@ -720,7 +720,7 @@ public class ArticlesResourceIntegrationTest extends ResourcesIntegrationTest {
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 2)
+	        .queryParam("offset", 20)
 	        .queryParam("limit", 5)
 	        .get(ARTICLES_RESOURCE_PATH)
 	        .then()
@@ -734,7 +734,7 @@ public class ArticlesResourceIntegrationTest extends ResourcesIntegrationTest {
 	}
 	
 	@Test
-	public void given10Articles_whenExecuteFindArticlesByFilterWithOffset1AndLimit10_shouldReturnListOf0Articles() {
+	public void given10Articles_whenExecuteFindArticlesByFilterWithOffset10AndLimit10_shouldReturnListOf0Articles() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
@@ -746,7 +746,7 @@ public class ArticlesResourceIntegrationTest extends ResourcesIntegrationTest {
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 1)
+	        .queryParam("offset", 10)
 	        .queryParam("limit", 10)
 	        .get(ARTICLES_RESOURCE_PATH)
 	        .then()
@@ -760,7 +760,7 @@ public class ArticlesResourceIntegrationTest extends ResourcesIntegrationTest {
 	}
 	
 	@Test
-	public void given10Articles_whenExecuteFindArticlesByFilterWithOffset1AndLimit115_shouldReturnListOf0Articles() {
+	public void given10Articles_whenExecuteFindArticlesByFilterWithOffset10AndLimit115_shouldReturnListOf0Articles() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
@@ -772,7 +772,7 @@ public class ArticlesResourceIntegrationTest extends ResourcesIntegrationTest {
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 1)
+	        .queryParam("offset", 10)
 	        .queryParam("limit", 15)
 	        .get(ARTICLES_RESOURCE_PATH)
 	        .then()

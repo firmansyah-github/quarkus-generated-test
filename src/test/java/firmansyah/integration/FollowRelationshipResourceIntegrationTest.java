@@ -1,4 +1,4 @@
-// created by the factor : Feb 13, 2024, 4:07:37 PM  
+// created by the factor : Feb 23, 2024, 6:45:22 AM  
 package firmansyah.integration;
 
 import static io.restassured.RestAssured.given;
@@ -489,11 +489,11 @@ public class FollowRelationshipResourceIntegrationTest extends ResourcesIntegrat
 	}
 	
 	@Test
-	public void given10FollowRelationship_whenExecuteFindFollowRelationshipByFilterWithOffset1AndLimit5_shouldReturnListOf5FollowRelationship() {
+	public void given15FollowRelationship_whenExecuteFindFollowRelationshipByFilterWithOffset10AndLimit5_shouldReturnListOf5FollowRelationship() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
-	    for (int i = 0; i < 10; i++) {
+	    for (int i = 0; i < 15; i++) {
 	    	createFollowRelationship(String.valueOf(i));
 		}
 	   
@@ -501,7 +501,7 @@ public class FollowRelationshipResourceIntegrationTest extends ResourcesIntegrat
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 1)
+	        .queryParam("offset", 10)
 	        .queryParam("limit", 5)
 	        .get(FOLLOWRELATIONSHIP_RESOURCE_PATH)
 	        .then()
@@ -518,7 +518,7 @@ public class FollowRelationshipResourceIntegrationTest extends ResourcesIntegrat
 	}
 	
 	@Test
-	public void given10FollowRelationship_whenExecuteFindFollowRelationshipByFilterWithOffset2AndLimit5_shouldReturnListOf0FollowRelationship() {
+	public void given10FollowRelationship_whenExecuteFindFollowRelationshipByFilterWithOffset20AndLimit5_shouldReturnListOf0FollowRelationship() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
@@ -530,7 +530,7 @@ public class FollowRelationshipResourceIntegrationTest extends ResourcesIntegrat
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 2)
+	        .queryParam("offset", 20)
 	        .queryParam("limit", 5)
 	        .get(FOLLOWRELATIONSHIP_RESOURCE_PATH)
 	        .then()
@@ -544,7 +544,7 @@ public class FollowRelationshipResourceIntegrationTest extends ResourcesIntegrat
 	}
 	
 	@Test
-	public void given10FollowRelationship_whenExecuteFindFollowRelationshipByFilterWithOffset1AndLimit10_shouldReturnListOf0FollowRelationship() {
+	public void given10FollowRelationship_whenExecuteFindFollowRelationshipByFilterWithOffset10AndLimit10_shouldReturnListOf0FollowRelationship() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
@@ -556,7 +556,7 @@ public class FollowRelationshipResourceIntegrationTest extends ResourcesIntegrat
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 1)
+	        .queryParam("offset", 10)
 	        .queryParam("limit", 10)
 	        .get(FOLLOWRELATIONSHIP_RESOURCE_PATH)
 	        .then()
@@ -570,7 +570,7 @@ public class FollowRelationshipResourceIntegrationTest extends ResourcesIntegrat
 	}
 	
 	@Test
-	public void given10FollowRelationship_whenExecuteFindFollowRelationshipByFilterWithOffset1AndLimit115_shouldReturnListOf0FollowRelationship() {
+	public void given10FollowRelationship_whenExecuteFindFollowRelationshipByFilterWithOffset10AndLimit115_shouldReturnListOf0FollowRelationship() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
@@ -582,7 +582,7 @@ public class FollowRelationshipResourceIntegrationTest extends ResourcesIntegrat
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 1)
+	        .queryParam("offset", 10)
 	        .queryParam("limit", 15)
 	        .get(FOLLOWRELATIONSHIP_RESOURCE_PATH)
 	        .then()

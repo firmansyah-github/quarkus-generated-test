@@ -1,4 +1,4 @@
-// created by the factor : Feb 13, 2024, 4:07:37 PM  
+// created by the factor : Feb 23, 2024, 6:45:22 AM  
 package firmansyah.integration;
 
 import static io.restassured.RestAssured.given;
@@ -613,11 +613,11 @@ public class CommentsResourceIntegrationTest extends ResourcesIntegrationTest {
 	}
 	
 	@Test
-	public void given10Comments_whenExecuteFindCommentsByFilterWithOffset1AndLimit5_shouldReturnListOf5Comments() {
+	public void given15Comments_whenExecuteFindCommentsByFilterWithOffset10AndLimit5_shouldReturnListOf5Comments() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
-	    for (int i = 0; i < 10; i++) {
+	    for (int i = 0; i < 15; i++) {
 	    	createComments(String.valueOf(i));
 		}
 	   
@@ -625,7 +625,7 @@ public class CommentsResourceIntegrationTest extends ResourcesIntegrationTest {
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 1)
+	        .queryParam("offset", 10)
 	        .queryParam("limit", 5)
 	        .get(COMMENTS_RESOURCE_PATH)
 	        .then()
@@ -650,7 +650,7 @@ public class CommentsResourceIntegrationTest extends ResourcesIntegrationTest {
 	}
 	
 	@Test
-	public void given10Comments_whenExecuteFindCommentsByFilterWithOffset2AndLimit5_shouldReturnListOf0Comments() {
+	public void given10Comments_whenExecuteFindCommentsByFilterWithOffset20AndLimit5_shouldReturnListOf0Comments() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
@@ -662,7 +662,7 @@ public class CommentsResourceIntegrationTest extends ResourcesIntegrationTest {
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 2)
+	        .queryParam("offset", 20)
 	        .queryParam("limit", 5)
 	        .get(COMMENTS_RESOURCE_PATH)
 	        .then()
@@ -676,7 +676,7 @@ public class CommentsResourceIntegrationTest extends ResourcesIntegrationTest {
 	}
 	
 	@Test
-	public void given10Comments_whenExecuteFindCommentsByFilterWithOffset1AndLimit10_shouldReturnListOf0Comments() {
+	public void given10Comments_whenExecuteFindCommentsByFilterWithOffset10AndLimit10_shouldReturnListOf0Comments() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
@@ -688,7 +688,7 @@ public class CommentsResourceIntegrationTest extends ResourcesIntegrationTest {
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 1)
+	        .queryParam("offset", 10)
 	        .queryParam("limit", 10)
 	        .get(COMMENTS_RESOURCE_PATH)
 	        .then()
@@ -702,7 +702,7 @@ public class CommentsResourceIntegrationTest extends ResourcesIntegrationTest {
 	}
 	
 	@Test
-	public void given10Comments_whenExecuteFindCommentsByFilterWithOffset1AndLimit115_shouldReturnListOf0Comments() {
+	public void given10Comments_whenExecuteFindCommentsByFilterWithOffset10AndLimit115_shouldReturnListOf0Comments() {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	     
@@ -714,7 +714,7 @@ public class CommentsResourceIntegrationTest extends ResourcesIntegrationTest {
 	    given()
 	        .contentType(MediaType.APPLICATION_JSON)
 	        .header(AUTHORIZATION_HEADER, authorizationHeader)
-	        .queryParam("offset", 1)
+	        .queryParam("offset", 10)
 	        .queryParam("limit", 15)
 	        .get(COMMENTS_RESOURCE_PATH)
 	        .then()

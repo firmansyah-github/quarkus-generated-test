@@ -1,4 +1,4 @@
-// created by the factor : Feb 13, 2024, 4:07:37 PM  
+// created by the factor : Feb 23, 2024, 6:45:22 AM  
 package firmansyah.infrastructure.repository.hibernate.panache;
 
 import java.util.LinkedHashMap;
@@ -110,7 +110,8 @@ public class UsersRepositoryPanache extends AbstractPanacheRepository<UsersEntit
         }
 
         // Apply pagination
-        queryBuilder.page(filter.getOffset(), filter.getLimit());
+        //queryBuilder.page(filter.getOffset(), filter.getLimit());
+        queryBuilder.range(filter.getOffset(), filter.getOffset()+filter.getLimit()-1);
 
         // Execute the query
         final var usersResult = queryBuilder.list().stream()
