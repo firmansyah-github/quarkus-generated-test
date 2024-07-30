@@ -1,4 +1,4 @@
-// created by the factor : Feb 23, 2024, 6:45:22 AM  
+// created by the factor : May 30, 2024, 6:48:44 AM  
 package firmansyah.domain.feature.impl;
 
 import lombok.AllArgsConstructor;
@@ -14,15 +14,15 @@ public class CreateTagRelationshipImpl implements CreateTagRelationship {
 
 	private final TagRelationshipRepository tagRelationshipRepository;
 	private final TagRelationshipModelBuilder tagRelationshipBuilder;
-	private final FindTagsByPrimaryKey findTagsTagIdByPrimaryKey;
 	private final FindArticlesByPrimaryKey findArticlesArticleIdByPrimaryKey;
+	private final FindTagsByPrimaryKey findTagsTagIdByPrimaryKey;
 	
 
 	@Override
 	public TagRelationship handle(NewTagRelationshipInput newTagRelationshipInput) {
 		final var tagRelationship =
-			tagRelationshipBuilder.build(findTagsTagIdByPrimaryKey.handle(newTagRelationshipInput.getTagId()),
-					findArticlesArticleIdByPrimaryKey.handle(newTagRelationshipInput.getArticleId()));
+			tagRelationshipBuilder.build(findArticlesArticleIdByPrimaryKey.handle(newTagRelationshipInput.getArticleId()),
+					findTagsTagIdByPrimaryKey.handle(newTagRelationshipInput.getTagId()));
 		
 		if(tagRelationshipRepository.findTagRelationshipByPrimaryKey(tagRelationship.getArticlesArticleId().getId(), tagRelationship.getTagsTagId().getId()).isPresent()) {
 			throw new TagRelationshipAlreadyExistsException();

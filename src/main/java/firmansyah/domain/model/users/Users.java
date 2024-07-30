@@ -1,4 +1,4 @@
-// created by the factor : Feb 23, 2024, 6:45:22 AM  
+// created by the factor : May 30, 2024, 6:48:44 AM  
 package firmansyah.domain.model.users;
 
 import lombok.AccessLevel;
@@ -8,14 +8,16 @@ import lombok.Data;
             
 import firmansyah.domain.model.constants.ValidationMessages;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
 
 
+import firmansyah.domain.model.comments.Comments;
+import firmansyah.domain.model.articles.Articles;
 import firmansyah.domain.model.favoriteRelationship.FavoriteRelationship;
 import firmansyah.domain.model.followRelationship.FollowRelationship;
 import firmansyah.domain.model.followRelationship.FollowRelationship;
-import firmansyah.domain.model.comments.Comments;
-import firmansyah.domain.model.articles.Articles;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,11 +38,11 @@ public class Users {
 	private String password;
 	@Size(message = ValidationMessages.USERS_USERNAME_MAX_LENGTH, max = 255)
 	private String username;
+	private List<Comments> commentsAuthorIdList;
+	private List<Articles> articlesAuthorIdList;
 	private List<FavoriteRelationship> favoriteRelationshipUserIdList;
 	private List<FollowRelationship> followRelationshipFollowedIdList;
 	private List<FollowRelationship> followRelationshipUserIdList;
-	private List<Comments> commentsAuthorIdList;
-	private List<Articles> articlesAuthorIdList;
 	
 	
 }

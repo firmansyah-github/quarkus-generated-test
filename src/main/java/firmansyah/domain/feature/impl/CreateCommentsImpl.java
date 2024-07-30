@@ -1,4 +1,4 @@
-// created by the factor : Feb 23, 2024, 6:45:22 AM  
+// created by the factor : May 30, 2024, 6:48:44 AM  
 package firmansyah.domain.feature.impl;
 
 import lombok.AllArgsConstructor;
@@ -14,8 +14,8 @@ public class CreateCommentsImpl implements CreateComments {
 
 	private final CommentsRepository commentsRepository;
 	private final CommentsModelBuilder commentsBuilder;
-	private final FindUsersByPrimaryKey findUsersAuthorIdByPrimaryKey;
 	private final FindArticlesByPrimaryKey findArticlesArticleIdByPrimaryKey;
+	private final FindUsersByPrimaryKey findUsersAuthorIdByPrimaryKey;
 	
 
 	@Override
@@ -25,8 +25,8 @@ public class CreateCommentsImpl implements CreateComments {
 					newCommentsInput.getUpdatedat(),
 					newCommentsInput.getBody(),
 					newCommentsInput.getId(),
-					findUsersAuthorIdByPrimaryKey.handle(newCommentsInput.getAuthorId()),
-					findArticlesArticleIdByPrimaryKey.handle(newCommentsInput.getArticleId()));
+					findArticlesArticleIdByPrimaryKey.handle(newCommentsInput.getArticleId()),
+					findUsersAuthorIdByPrimaryKey.handle(newCommentsInput.getAuthorId()));
 		
 		if(commentsRepository.findCommentsByPrimaryKey(comments.getId()).isPresent()) {
 			throw new CommentsAlreadyExistsException();

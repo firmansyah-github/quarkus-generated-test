@@ -1,4 +1,4 @@
-// created by the factor : Feb 23, 2024, 6:45:22 AM  
+// created by the factor : May 30, 2024, 6:48:44 AM  
 package firmansyah.infrastructure.repository.hibernate.panache;
 
 import java.util.LinkedHashMap;
@@ -18,8 +18,8 @@ import firmansyah.infrastructure.repository.hibernate.entity.CommentsEntity;
 import firmansyah.infrastructure.repository.hibernate.entity.EntityUtils;
 import firmansyah.infrastructure.repository.hibernate.panache.utils.SimpleQueryBuilder;
 import java.lang.String;
-import firmansyah.infrastructure.repository.hibernate.entity.UsersEntity;
 import firmansyah.infrastructure.repository.hibernate.entity.ArticlesEntity;
+import firmansyah.infrastructure.repository.hibernate.entity.UsersEntity;
 
 import java.time.LocalDateTime;
 
@@ -37,9 +37,9 @@ public class CommentsRepositoryPanache extends AbstractPanacheRepository<Comment
 
   	@Override
   	public void save(Comments comments) {
-		final var usersAuthorIdEntity = getEntityManager().find(UsersEntity.class,comments.getUsersAuthorId().getId());
 		final var articlesArticleIdEntity = getEntityManager().find(ArticlesEntity.class,comments.getArticlesArticleId().getId());
-		persistAndFlush(new CommentsEntity(comments ,usersAuthorIdEntity,articlesArticleIdEntity));
+		final var usersAuthorIdEntity = getEntityManager().find(UsersEntity.class,comments.getUsersAuthorId().getId());
+		persistAndFlush(new CommentsEntity(comments ,articlesArticleIdEntity,usersAuthorIdEntity));
 		
   	}
 
@@ -51,10 +51,10 @@ public class CommentsRepositoryPanache extends AbstractPanacheRepository<Comment
 
   	@Override
   	public void update(Comments comments) {
-		final var usersAuthorIdEntity= getEntityManager().find(UsersEntity.class, comments.getUsersAuthorId().getId());
 		final var articlesArticleIdEntity= getEntityManager().find(ArticlesEntity.class, comments.getArticlesArticleId().getId());
+		final var usersAuthorIdEntity= getEntityManager().find(UsersEntity.class, comments.getUsersAuthorId().getId());
 		final var commentsEntity = findById(comments.getId());
-		commentsEntity.update(comments ,usersAuthorIdEntity,articlesArticleIdEntity);
+		commentsEntity.update(comments ,articlesArticleIdEntity,usersAuthorIdEntity);
 		
     }
 

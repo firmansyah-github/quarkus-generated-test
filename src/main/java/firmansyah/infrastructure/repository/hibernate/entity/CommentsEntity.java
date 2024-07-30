@@ -1,4 +1,4 @@
-// created by the factor : Feb 23, 2024, 6:45:22 AM  
+// created by the factor : May 30, 2024, 6:48:44 AM  
 package firmansyah.infrastructure.repository.hibernate.entity;
 
 import lombok.AllArgsConstructor;
@@ -33,15 +33,16 @@ public class CommentsEntity {
 	private UsersEntity usersAuthorId;
 	private String body;
 	@Id
+	@Column(name = "id")
 	private String id;
 
-	public CommentsEntity(Comments comments ,UsersEntity usersAuthorIdEntity,ArticlesEntity articlesArticleIdEntity) {
+	public CommentsEntity(Comments comments ,ArticlesEntity articlesArticleIdEntity,UsersEntity usersAuthorIdEntity) {
 		this.id = comments.getId();
-		update(comments ,usersAuthorIdEntity,articlesArticleIdEntity);
+		update(comments ,articlesArticleIdEntity,usersAuthorIdEntity);
 		
   	}
   	
-  	public void update(Comments comments ,UsersEntity usersAuthorIdEntity,ArticlesEntity articlesArticleIdEntity){
+  	public void update(Comments comments ,ArticlesEntity articlesArticleIdEntity,UsersEntity usersAuthorIdEntity){
 		this.createdat = comments.getCreatedat();
 		this.updatedat = comments.getUpdatedat();
 		this.articlesArticleId =articlesArticleIdEntity;

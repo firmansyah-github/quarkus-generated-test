@@ -1,4 +1,4 @@
-// created by the factor : Feb 23, 2024, 6:45:22 AM  
+// created by the factor : May 30, 2024, 6:48:44 AM  
 package firmansyah.integration;
 
 import static io.restassured.RestAssured.given;
@@ -14,6 +14,8 @@ import static org.hamcrest.Matchers.anyOf;
 
 import jakarta.ws.rs.core.MediaType;
 
+import java.util.Base64;
+
 import org.apache.http.HttpStatus;
 import firmansyah.application.web.model.request.NewTagRelationshipRequest;
 import firmansyah.application.web.model.request.UpdateTagRelationshipRequest;
@@ -22,25 +24,37 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
+import io.restassured.config.HttpClientConfig;
+import io.restassured.config.RestAssuredConfig;
+import org.junit.jupiter.api.BeforeEach;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @QuarkusTest
 public class TagRelationshipResourceIntegrationTest extends ResourcesIntegrationTest {
 
 	private final String TAGRELATIONSHIP_RESOURCE_PATH = API_PREFIX + "/firmansyah/tagRelationship";
   
+    @BeforeEach
+    public void setup() {
+        RestAssured.config = RestAssuredConfig.config().httpClient(HttpClientConfig.httpClientConfig()
+                .setParam("http.socket.timeout", 600000)  // 60 seconds
+                .setParam("http.connection.timeout", 600000));  // 60 seconds
+    } 
+    
+    
 	@Test
   	public void givenANewTagRelationship_whenExecuteCreateEndpoint_shouldReturnCreatedTagRelationship201() throws JsonProcessingException {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
 	    String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 	   
 		NewTagRelationshipRequest tagRelationship = new NewTagRelationshipRequest();
-			final var tagsTagIdEntity= createTags("");
-			tagRelationship.setTagId( tagsTagIdEntity.getId());
 			final var articlesArticleIdEntity= createArticles("");
 			tagRelationship.setArticleId( articlesArticleIdEntity.getId());
+			final var tagsTagIdEntity= createTags("");
+			tagRelationship.setTagId( tagsTagIdEntity.getId());
 			
 
 		given().contentType(MediaType.APPLICATION_JSON).header(AUTHORIZATION_HEADER, authorizationHeader)
@@ -63,10 +77,10 @@ public class TagRelationshipResourceIntegrationTest extends ResourcesIntegration
         throws JsonProcessingException {
     
 		NewTagRelationshipRequest tagRelationship = new NewTagRelationshipRequest();
-			final var tagsTagIdEntity= createTags("");
-			tagRelationship.setTagId( tagsTagIdEntity.getId());
 			final var articlesArticleIdEntity= createArticles("");
 			tagRelationship.setArticleId( articlesArticleIdEntity.getId());
+			final var tagsTagIdEntity= createTags("");
+			tagRelationship.setTagId( tagsTagIdEntity.getId());
 			
 	
     	given()
@@ -212,10 +226,10 @@ public class TagRelationshipResourceIntegrationTest extends ResourcesIntegration
 	  	String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 
 		UpdateTagRelationshipRequest tagRelationship = new UpdateTagRelationshipRequest();
-			final var tagsTagIdEntity= createTags("");
-			tagRelationship.setTagId( tagsTagIdEntity.getId());
 			final var articlesArticleIdEntity= createArticles("");
 			tagRelationship.setArticleId( articlesArticleIdEntity.getId());
+			final var tagsTagIdEntity= createTags("");
+			tagRelationship.setTagId( tagsTagIdEntity.getId());
 			
 	  
 		given().contentType(MediaType.APPLICATION_JSON).header(AUTHORIZATION_HEADER, authorizationHeader)
@@ -233,8 +247,8 @@ public class TagRelationshipResourceIntegrationTest extends ResourcesIntegration
 	  	String authorizationHeader = AUTHORIZATION_HEADER_VALUE_PREFIX + token(user);
 
 		NewTagRelationshipRequest tagRelationship = new NewTagRelationshipRequest();
-			tagRelationship.setTagId("tagId");
 			tagRelationship.setArticleId("articleId");
+			tagRelationship.setTagId("tagId");
 			
 	 
 		given().contentType(MediaType.APPLICATION_JSON).header(AUTHORIZATION_HEADER, authorizationHeader)
@@ -245,7 +259,7 @@ public class TagRelationshipResourceIntegrationTest extends ResourcesIntegration
         	.statusCode(HttpStatus.SC_NOT_FOUND)
         	.body(
            		"errors.body", 
-           		anyOf(hasItems("tags not found"),hasItems("articles not found")));
+           		anyOf(hasItems("articles not found"),hasItems("tags not found")));
   	}
   
    	@Test
@@ -267,7 +281,7 @@ public class TagRelationshipResourceIntegrationTest extends ResourcesIntegration
          	.statusCode(HttpStatus.SC_NOT_FOUND)
          	.body(
             	"errors.body", 
-            	anyOf(hasItems("tagRelationship not found"),hasItems("tags not found"),hasItems("articles not found")	));
+            	anyOf(hasItems("tagRelationship not found"),hasItems("articles not found"),hasItems("tags not found")	));
    	}
      
    	

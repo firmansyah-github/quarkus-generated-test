@@ -1,4 +1,4 @@
-// created by the factor : Feb 23, 2024, 6:45:22 AM  
+// created by the factor : May 30, 2024, 6:48:44 AM  
 package firmansyah.infrastructure.configuration;
 
 import firmansyah.domain.feature.*;
@@ -20,10 +20,10 @@ public class TagRelationshipConfiguration {
   	@Singleton
   	public CreateTagRelationship createTagRelationship(
 		TagRelationshipRepository tagRelationshipRepository,
-      	TagRelationshipModelBuilder tagRelationshipBuilder ,FindTagsByPrimaryKey findTagsTagIdByPrimaryKey,FindArticlesByPrimaryKey findArticlesArticleIdByPrimaryKey) {
+      	TagRelationshipModelBuilder tagRelationshipBuilder ,FindArticlesByPrimaryKey findArticlesArticleIdByPrimaryKey,FindTagsByPrimaryKey findTagsTagIdByPrimaryKey) {
     	return new CreateTagRelationshipImpl(
         	tagRelationshipRepository,
-        	tagRelationshipBuilder ,findTagsTagIdByPrimaryKey,findArticlesArticleIdByPrimaryKey);
+        	tagRelationshipBuilder ,findArticlesArticleIdByPrimaryKey,findTagsTagIdByPrimaryKey);
   	}
   
   	@Produces
@@ -51,11 +51,11 @@ public class TagRelationshipConfiguration {
   	public UpdateTagRelationship updateTagRelationship(
 		TagRelationshipRepository tagRelationshipRepository,
       	TagRelationshipModelBuilder tagRelationshipBuilder,
-      	FindTagRelationshipByPrimaryKey findTagRelationshipByPrimaryKey	,FindTagsByPrimaryKey findTagsTagIdByPrimaryKey,FindArticlesByPrimaryKey findArticlesArticleIdByPrimaryKey) {
+      	FindTagRelationshipByPrimaryKey findTagRelationshipByPrimaryKey	,FindArticlesByPrimaryKey findArticlesArticleIdByPrimaryKey,FindTagsByPrimaryKey findTagsTagIdByPrimaryKey) {
 		return new UpdateTagRelationshipImpl(
         	tagRelationshipRepository,
         	tagRelationshipBuilder,
-        	findTagRelationshipByPrimaryKey ,findTagsTagIdByPrimaryKey,findArticlesArticleIdByPrimaryKey);
+        	findTagRelationshipByPrimaryKey ,findArticlesArticleIdByPrimaryKey,findTagsTagIdByPrimaryKey);
   	}
   
 

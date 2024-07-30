@@ -1,4 +1,4 @@
-# created by the factor : Feb 23, 2024, 6:45:22 AM  
+# created by the factor : May 30, 2024, 6:48:44 AM  
 #!/bin/bash
 set -x
 
@@ -57,6 +57,14 @@ npx newman run $SCRIPTDIR/factor.articles.postman.collection.json \
   --reporter-json-export "./target/postman/reports/factor.articles.$LocalDateTimeNow.json" \
   --reporter-junit-export "./target/postman/reports/factor.articles.$LocalDateTimeNow.xml" 
 
+npx newman run $SCRIPTDIR/factor.categories.postman.collection.json \
+  --global-var "APIURL=$APIURLVAR" \
+  --delay-request 250 --timeout-request 2000 -n 1 --reporters cli,json,htmlextra,junit,html \
+  --reporter-htmlextra-export "./target/postman/reports/factor.categories.$LocalDateTimeNow.extra.html" \
+  --reporter-html-export "./target/postman/reports/factor.categories.$LocalDateTimeNow.html" \
+  --reporter-json-export "./target/postman/reports/factor.categories.$LocalDateTimeNow.json" \
+  --reporter-junit-export "./target/postman/reports/factor.categories.$LocalDateTimeNow.xml" 
+
 npx newman run $SCRIPTDIR/factor.comments.postman.collection.json \
   --global-var "APIURL=$APIURLVAR" \
   --delay-request 250 --timeout-request 2000 -n 1 --reporters cli,json,htmlextra,junit,html \
@@ -64,6 +72,38 @@ npx newman run $SCRIPTDIR/factor.comments.postman.collection.json \
   --reporter-html-export "./target/postman/reports/factor.comments.$LocalDateTimeNow.html" \
   --reporter-json-export "./target/postman/reports/factor.comments.$LocalDateTimeNow.json" \
   --reporter-junit-export "./target/postman/reports/factor.comments.$LocalDateTimeNow.xml" 
+
+npx newman run $SCRIPTDIR/factor.customer_customer_demo.postman.collection.json \
+  --global-var "APIURL=$APIURLVAR" \
+  --delay-request 250 --timeout-request 2000 -n 1 --reporters cli,json,htmlextra,junit,html \
+  --reporter-htmlextra-export "./target/postman/reports/factor.customer_customer_demo.$LocalDateTimeNow.extra.html" \
+  --reporter-html-export "./target/postman/reports/factor.customer_customer_demo.$LocalDateTimeNow.html" \
+  --reporter-json-export "./target/postman/reports/factor.customer_customer_demo.$LocalDateTimeNow.json" \
+  --reporter-junit-export "./target/postman/reports/factor.customer_customer_demo.$LocalDateTimeNow.xml" 
+
+npx newman run $SCRIPTDIR/factor.customer_demographics.postman.collection.json \
+  --global-var "APIURL=$APIURLVAR" \
+  --delay-request 250 --timeout-request 2000 -n 1 --reporters cli,json,htmlextra,junit,html \
+  --reporter-htmlextra-export "./target/postman/reports/factor.customer_demographics.$LocalDateTimeNow.extra.html" \
+  --reporter-html-export "./target/postman/reports/factor.customer_demographics.$LocalDateTimeNow.html" \
+  --reporter-json-export "./target/postman/reports/factor.customer_demographics.$LocalDateTimeNow.json" \
+  --reporter-junit-export "./target/postman/reports/factor.customer_demographics.$LocalDateTimeNow.xml" 
+
+npx newman run $SCRIPTDIR/factor.customers.postman.collection.json \
+  --global-var "APIURL=$APIURLVAR" \
+  --delay-request 250 --timeout-request 2000 -n 1 --reporters cli,json,htmlextra,junit,html \
+  --reporter-htmlextra-export "./target/postman/reports/factor.customers.$LocalDateTimeNow.extra.html" \
+  --reporter-html-export "./target/postman/reports/factor.customers.$LocalDateTimeNow.html" \
+  --reporter-json-export "./target/postman/reports/factor.customers.$LocalDateTimeNow.json" \
+  --reporter-junit-export "./target/postman/reports/factor.customers.$LocalDateTimeNow.xml" 
+
+npx newman run $SCRIPTDIR/factor.employee_territories.postman.collection.json \
+  --global-var "APIURL=$APIURLVAR" \
+  --delay-request 250 --timeout-request 2000 -n 1 --reporters cli,json,htmlextra,junit,html \
+  --reporter-htmlextra-export "./target/postman/reports/factor.employee_territories.$LocalDateTimeNow.extra.html" \
+  --reporter-html-export "./target/postman/reports/factor.employee_territories.$LocalDateTimeNow.html" \
+  --reporter-json-export "./target/postman/reports/factor.employee_territories.$LocalDateTimeNow.json" \
+  --reporter-junit-export "./target/postman/reports/factor.employee_territories.$LocalDateTimeNow.xml" 
 
 npx newman run $SCRIPTDIR/factor.favorite_relationship.postman.collection.json \
   --global-var "APIURL=$APIURLVAR" \
@@ -81,6 +121,54 @@ npx newman run $SCRIPTDIR/factor.follow_relationship.postman.collection.json \
   --reporter-json-export "./target/postman/reports/factor.follow_relationship.$LocalDateTimeNow.json" \
   --reporter-junit-export "./target/postman/reports/factor.follow_relationship.$LocalDateTimeNow.xml" 
 
+npx newman run $SCRIPTDIR/factor.order_details.postman.collection.json \
+  --global-var "APIURL=$APIURLVAR" \
+  --delay-request 250 --timeout-request 2000 -n 1 --reporters cli,json,htmlextra,junit,html \
+  --reporter-htmlextra-export "./target/postman/reports/factor.order_details.$LocalDateTimeNow.extra.html" \
+  --reporter-html-export "./target/postman/reports/factor.order_details.$LocalDateTimeNow.html" \
+  --reporter-json-export "./target/postman/reports/factor.order_details.$LocalDateTimeNow.json" \
+  --reporter-junit-export "./target/postman/reports/factor.order_details.$LocalDateTimeNow.xml" 
+
+npx newman run $SCRIPTDIR/factor.orders.postman.collection.json \
+  --global-var "APIURL=$APIURLVAR" \
+  --delay-request 250 --timeout-request 2000 -n 1 --reporters cli,json,htmlextra,junit,html \
+  --reporter-htmlextra-export "./target/postman/reports/factor.orders.$LocalDateTimeNow.extra.html" \
+  --reporter-html-export "./target/postman/reports/factor.orders.$LocalDateTimeNow.html" \
+  --reporter-json-export "./target/postman/reports/factor.orders.$LocalDateTimeNow.json" \
+  --reporter-junit-export "./target/postman/reports/factor.orders.$LocalDateTimeNow.xml" 
+
+npx newman run $SCRIPTDIR/factor.products.postman.collection.json \
+  --global-var "APIURL=$APIURLVAR" \
+  --delay-request 250 --timeout-request 2000 -n 1 --reporters cli,json,htmlextra,junit,html \
+  --reporter-htmlextra-export "./target/postman/reports/factor.products.$LocalDateTimeNow.extra.html" \
+  --reporter-html-export "./target/postman/reports/factor.products.$LocalDateTimeNow.html" \
+  --reporter-json-export "./target/postman/reports/factor.products.$LocalDateTimeNow.json" \
+  --reporter-junit-export "./target/postman/reports/factor.products.$LocalDateTimeNow.xml" 
+
+npx newman run $SCRIPTDIR/factor.region.postman.collection.json \
+  --global-var "APIURL=$APIURLVAR" \
+  --delay-request 250 --timeout-request 2000 -n 1 --reporters cli,json,htmlextra,junit,html \
+  --reporter-htmlextra-export "./target/postman/reports/factor.region.$LocalDateTimeNow.extra.html" \
+  --reporter-html-export "./target/postman/reports/factor.region.$LocalDateTimeNow.html" \
+  --reporter-json-export "./target/postman/reports/factor.region.$LocalDateTimeNow.json" \
+  --reporter-junit-export "./target/postman/reports/factor.region.$LocalDateTimeNow.xml" 
+
+npx newman run $SCRIPTDIR/factor.shippers.postman.collection.json \
+  --global-var "APIURL=$APIURLVAR" \
+  --delay-request 250 --timeout-request 2000 -n 1 --reporters cli,json,htmlextra,junit,html \
+  --reporter-htmlextra-export "./target/postman/reports/factor.shippers.$LocalDateTimeNow.extra.html" \
+  --reporter-html-export "./target/postman/reports/factor.shippers.$LocalDateTimeNow.html" \
+  --reporter-json-export "./target/postman/reports/factor.shippers.$LocalDateTimeNow.json" \
+  --reporter-junit-export "./target/postman/reports/factor.shippers.$LocalDateTimeNow.xml" 
+
+npx newman run $SCRIPTDIR/factor.suppliers.postman.collection.json \
+  --global-var "APIURL=$APIURLVAR" \
+  --delay-request 250 --timeout-request 2000 -n 1 --reporters cli,json,htmlextra,junit,html \
+  --reporter-htmlextra-export "./target/postman/reports/factor.suppliers.$LocalDateTimeNow.extra.html" \
+  --reporter-html-export "./target/postman/reports/factor.suppliers.$LocalDateTimeNow.html" \
+  --reporter-json-export "./target/postman/reports/factor.suppliers.$LocalDateTimeNow.json" \
+  --reporter-junit-export "./target/postman/reports/factor.suppliers.$LocalDateTimeNow.xml" 
+
 npx newman run $SCRIPTDIR/factor.tag_relationship.postman.collection.json \
   --global-var "APIURL=$APIURLVAR" \
   --delay-request 250 --timeout-request 2000 -n 1 --reporters cli,json,htmlextra,junit,html \
@@ -97,6 +185,22 @@ npx newman run $SCRIPTDIR/factor.tags.postman.collection.json \
   --reporter-json-export "./target/postman/reports/factor.tags.$LocalDateTimeNow.json" \
   --reporter-junit-export "./target/postman/reports/factor.tags.$LocalDateTimeNow.xml" 
 
+npx newman run $SCRIPTDIR/factor.territories.postman.collection.json \
+  --global-var "APIURL=$APIURLVAR" \
+  --delay-request 250 --timeout-request 2000 -n 1 --reporters cli,json,htmlextra,junit,html \
+  --reporter-htmlextra-export "./target/postman/reports/factor.territories.$LocalDateTimeNow.extra.html" \
+  --reporter-html-export "./target/postman/reports/factor.territories.$LocalDateTimeNow.html" \
+  --reporter-json-export "./target/postman/reports/factor.territories.$LocalDateTimeNow.json" \
+  --reporter-junit-export "./target/postman/reports/factor.territories.$LocalDateTimeNow.xml" 
+
+npx newman run $SCRIPTDIR/factor.us_states.postman.collection.json \
+  --global-var "APIURL=$APIURLVAR" \
+  --delay-request 250 --timeout-request 2000 -n 1 --reporters cli,json,htmlextra,junit,html \
+  --reporter-htmlextra-export "./target/postman/reports/factor.us_states.$LocalDateTimeNow.extra.html" \
+  --reporter-html-export "./target/postman/reports/factor.us_states.$LocalDateTimeNow.html" \
+  --reporter-json-export "./target/postman/reports/factor.us_states.$LocalDateTimeNow.json" \
+  --reporter-junit-export "./target/postman/reports/factor.us_states.$LocalDateTimeNow.xml" 
+
 npx newman run $SCRIPTDIR/factor.users.postman.collection.json \
   --global-var "APIURL=$APIURLVAR" \
   --delay-request 250 --timeout-request 2000 -n 1 --reporters cli,json,htmlextra,junit,html \
@@ -104,6 +208,14 @@ npx newman run $SCRIPTDIR/factor.users.postman.collection.json \
   --reporter-html-export "./target/postman/reports/factor.users.$LocalDateTimeNow.html" \
   --reporter-json-export "./target/postman/reports/factor.users.$LocalDateTimeNow.json" \
   --reporter-junit-export "./target/postman/reports/factor.users.$LocalDateTimeNow.xml" 
+
+npx newman run $SCRIPTDIR/factor.employees.postman.collection.json \
+  --global-var "APIURL=$APIURLVAR" \
+  --delay-request 250 --timeout-request 2000 -n 1 --reporters cli,json,htmlextra,junit,html \
+  --reporter-htmlextra-export "./target/postman/reports/factor.employees.$LocalDateTimeNow.extra.html" \
+  --reporter-html-export "./target/postman/reports/factor.employees.$LocalDateTimeNow.html" \
+  --reporter-json-export "./target/postman/reports/factor.employees.$LocalDateTimeNow.json" \
+  --reporter-junit-export "./target/postman/reports/factor.employees.$LocalDateTimeNow.xml" 
 
 
 

@@ -1,4 +1,4 @@
-// created by the factor : Feb 23, 2024, 6:45:22 AM  
+// created by the factor : May 30, 2024, 6:48:44 AM  
 package firmansyah.application.web.resource;
 
 import lombok.AllArgsConstructor;
@@ -34,16 +34,16 @@ public class CommentsResourceUtils extends ResourceUtils{
 		lsField.add("ID");
 	}
 
-	private final FindUsersByPrimaryKey findUsersAuthorIdByPrimaryKey;
 	private final FindArticlesByPrimaryKey findArticlesArticleIdByPrimaryKey;
+	private final FindUsersByPrimaryKey findUsersAuthorIdByPrimaryKey;
 	
   
 	public CommentsResponse commentsResponse(Comments comments) {
-		final var usersAuthorId =findUsersAuthorIdByPrimaryKey.handle(comments.getUsersAuthorId().getId());
 		final var articlesArticleId =findArticlesArticleIdByPrimaryKey.handle(comments.getArticlesArticleId().getId());
+		final var usersAuthorId =findUsersAuthorIdByPrimaryKey.handle(comments.getUsersAuthorId().getId());
 		final var commentsResponse = new CommentsResponse(comments ,
-										new UsersResponse(true, usersAuthorId),
-										new ArticlesResponse(true, articlesArticleId) );
+										new ArticlesResponse(true, articlesArticleId),
+										new UsersResponse(true, usersAuthorId) );
 		
         return commentsResponse;
 	}

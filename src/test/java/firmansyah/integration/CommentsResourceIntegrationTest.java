@@ -1,4 +1,4 @@
-// created by the factor : Feb 23, 2024, 6:45:22 AM  
+// created by the factor : May 30, 2024, 6:48:44 AM  
 package firmansyah.integration;
 
 import static io.restassured.RestAssured.given;
@@ -14,6 +14,8 @@ import static org.hamcrest.Matchers.anyOf;
 
 import jakarta.ws.rs.core.MediaType;
 
+import java.util.Base64;
+
 import org.apache.http.HttpStatus;
 import firmansyah.application.web.model.request.NewCommentsRequest;
 import firmansyah.application.web.model.request.UpdateCommentsRequest;
@@ -24,15 +26,27 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
+import io.restassured.config.HttpClientConfig;
+import io.restassured.config.RestAssuredConfig;
+import org.junit.jupiter.api.BeforeEach;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @QuarkusTest
 public class CommentsResourceIntegrationTest extends ResourcesIntegrationTest {
 
 	private final String COMMENTS_RESOURCE_PATH = API_PREFIX + "/firmansyah/comments";
   
+    @BeforeEach
+    public void setup() {
+        RestAssured.config = RestAssuredConfig.config().httpClient(HttpClientConfig.httpClientConfig()
+                .setParam("http.socket.timeout", 600000)  // 60 seconds
+                .setParam("http.connection.timeout", 600000));  // 60 seconds
+    } 
+    
+    
 	@Test
   	public void givenANewComments_whenExecuteCreateEndpoint_shouldReturnCreatedComments201() throws JsonProcessingException {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");
@@ -43,10 +57,10 @@ public class CommentsResourceIntegrationTest extends ResourcesIntegrationTest {
 			comments.setUpdatedat(LocalDateTime.now());
 			comments.setBody("body");
 			comments.setId("id");
-			final var usersAuthorIdEntity= createUsers("");
-			comments.setAuthorId( usersAuthorIdEntity.getId());
 			final var articlesArticleIdEntity= createArticles("");
 			comments.setArticleId( articlesArticleIdEntity.getId());
+			final var usersAuthorIdEntity= createUsers("");
+			comments.setAuthorId( usersAuthorIdEntity.getId());
 			
 
 		given().contentType(MediaType.APPLICATION_JSON).header(AUTHORIZATION_HEADER, authorizationHeader)
@@ -89,10 +103,10 @@ public class CommentsResourceIntegrationTest extends ResourcesIntegrationTest {
 			comments.setUpdatedat(LocalDateTime.now());
 			comments.setBody("body");
 			comments.setId("id");
-			final var usersAuthorIdEntity= createUsers("");
-			comments.setAuthorId( usersAuthorIdEntity.getId());
 			final var articlesArticleIdEntity= createArticles("");
 			comments.setArticleId( articlesArticleIdEntity.getId());
+			final var usersAuthorIdEntity= createUsers("");
+			comments.setAuthorId( usersAuthorIdEntity.getId());
 			
 	
     	given()
@@ -280,10 +294,10 @@ public class CommentsResourceIntegrationTest extends ResourcesIntegrationTest {
 			comments.setUpdatedat(LocalDateTime.now());
 			comments.setBody("body");
 			comments.setId("id");
-			final var usersAuthorIdEntity= createUsers("");
-			comments.setAuthorId( usersAuthorIdEntity.getId());
 			final var articlesArticleIdEntity= createArticles("");
 			comments.setArticleId( articlesArticleIdEntity.getId());
+			final var usersAuthorIdEntity= createUsers("");
+			comments.setAuthorId( usersAuthorIdEntity.getId());
 			
 	  
 		given().contentType(MediaType.APPLICATION_JSON).header(AUTHORIZATION_HEADER, authorizationHeader)
@@ -305,8 +319,8 @@ public class CommentsResourceIntegrationTest extends ResourcesIntegrationTest {
 			comments.setUpdatedat(LocalDateTime.now());
 			comments.setBody("body");
 			comments.setId("id");
-			comments.setAuthorId("authorId");
 			comments.setArticleId("articleId");
+			comments.setAuthorId("authorId");
 			
 	 
 		given().contentType(MediaType.APPLICATION_JSON).header(AUTHORIZATION_HEADER, authorizationHeader)
@@ -317,7 +331,7 @@ public class CommentsResourceIntegrationTest extends ResourcesIntegrationTest {
         	.statusCode(HttpStatus.SC_NOT_FOUND)
         	.body(
            		"errors.body", 
-           		anyOf(hasItems("users not found"),hasItems("articles not found")));
+           		anyOf(hasItems("articles not found"),hasItems("users not found")));
   	}
   
    	@Test
@@ -343,7 +357,7 @@ public class CommentsResourceIntegrationTest extends ResourcesIntegrationTest {
          	.statusCode(HttpStatus.SC_NOT_FOUND)
          	.body(
             	"errors.body", 
-            	anyOf(hasItems("comments not found"),hasItems("users not found"),hasItems("articles not found")	));
+            	anyOf(hasItems("comments not found"),hasItems("articles not found"),hasItems("users not found")	));
    	}
      
    	

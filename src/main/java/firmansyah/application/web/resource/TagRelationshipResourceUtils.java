@@ -1,4 +1,4 @@
-// created by the factor : Feb 23, 2024, 6:45:22 AM  
+// created by the factor : May 30, 2024, 6:48:44 AM  
 package firmansyah.application.web.resource;
 
 import lombok.AllArgsConstructor;
@@ -30,16 +30,16 @@ public class TagRelationshipResourceUtils extends ResourceUtils{
 		lsField.add("TAGID");
 	}
 
-	private final FindTagsByPrimaryKey findTagsTagIdByPrimaryKey;
 	private final FindArticlesByPrimaryKey findArticlesArticleIdByPrimaryKey;
+	private final FindTagsByPrimaryKey findTagsTagIdByPrimaryKey;
 	
   
 	public TagRelationshipResponse tagRelationshipResponse(TagRelationship tagRelationship) {
-		final var tagsTagId =findTagsTagIdByPrimaryKey.handle(tagRelationship.getTagsTagId().getId());
 		final var articlesArticleId =findArticlesArticleIdByPrimaryKey.handle(tagRelationship.getArticlesArticleId().getId());
+		final var tagsTagId =findTagsTagIdByPrimaryKey.handle(tagRelationship.getTagsTagId().getId());
 		final var tagRelationshipResponse = new TagRelationshipResponse(tagRelationship ,
-										new TagsResponse(true, tagsTagId),
-										new ArticlesResponse(true, articlesArticleId) );
+										new ArticlesResponse(true, articlesArticleId),
+										new TagsResponse(true, tagsTagId) );
 		
         return tagRelationshipResponse;
 	}

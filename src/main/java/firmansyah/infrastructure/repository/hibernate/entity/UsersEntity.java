@@ -1,4 +1,4 @@
-// created by the factor : Feb 23, 2024, 6:45:22 AM  
+// created by the factor : May 30, 2024, 6:48:44 AM  
 package firmansyah.infrastructure.repository.hibernate.entity;
 
 import lombok.AllArgsConstructor;
@@ -22,20 +22,21 @@ public class UsersEntity {
 	private String bio;
 	private String email;
 	@Id
+	@Column(name = "id")
 	private String id;
 	private String image;
 	private String password;
 	private String username;
+	@OneToMany(mappedBy = "usersAuthorId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CommentsEntity> commentsAuthorIdEntityList;
+	@OneToMany(mappedBy = "usersAuthorId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ArticlesEntity> articlesAuthorIdEntityList;
 	@OneToMany(mappedBy = "usersUserId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<FavoriteRelationshipEntity> favoriteRelationshipUserIdEntityList;
 	@OneToMany(mappedBy = "usersFollowedId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<FollowRelationshipEntity> followRelationshipFollowedIdEntityList;
 	@OneToMany(mappedBy = "usersUserId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<FollowRelationshipEntity> followRelationshipUserIdEntityList;
-	@OneToMany(mappedBy = "usersAuthorId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<CommentsEntity> commentsAuthorIdEntityList;
-	@OneToMany(mappedBy = "usersAuthorId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<ArticlesEntity> articlesAuthorIdEntityList;
 
 	public UsersEntity(Users users ) {
 		this.id = users.getId();

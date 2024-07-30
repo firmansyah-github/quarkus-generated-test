@@ -1,4 +1,4 @@
-// created by the factor : Feb 23, 2024, 6:45:22 AM  
+// created by the factor : May 30, 2024, 6:48:44 AM  
 package firmansyah.domain.model.tags;
 
 import lombok.AccessLevel;
@@ -8,6 +8,8 @@ import lombok.Data;
             
 import firmansyah.domain.model.constants.ValidationMessages;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
 
 

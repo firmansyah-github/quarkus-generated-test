@@ -1,4 +1,4 @@
-// created by the factor : Feb 23, 2024, 6:45:22 AM  
+// created by the factor : May 30, 2024, 6:48:44 AM  
 package firmansyah.domain.feature.impl;
 
 import lombok.AllArgsConstructor;
@@ -12,8 +12,8 @@ public class UpdateTagRelationshipImpl implements UpdateTagRelationship {
 	private final TagRelationshipRepository tagRelationshipRepository;
 	private final TagRelationshipModelBuilder tagRelationshipBuilder;
 	private final FindTagRelationshipByPrimaryKey findTagRelationshipByPrimaryKey;
-	private final FindTagsByPrimaryKey findTagsTagIdByPrimaryKey;
 	private final FindArticlesByPrimaryKey findArticlesArticleIdByPrimaryKey;
+	private final FindTagsByPrimaryKey findTagsTagIdByPrimaryKey;
 	
 
 	@Override
@@ -21,8 +21,8 @@ public class UpdateTagRelationshipImpl implements UpdateTagRelationship {
 		var tagRelationship = findTagRelationshipByPrimaryKey.handle(updateTagRelationshipInput.getArticleId(), updateTagRelationshipInput.getTagId());
 		
     	tagRelationship =
-			tagRelationshipBuilder.build(findTagsTagIdByPrimaryKey.handle(updateTagRelationshipInput.getTagId()),
-					findArticlesArticleIdByPrimaryKey.handle(updateTagRelationshipInput.getArticleId()));
+			tagRelationshipBuilder.build(findArticlesArticleIdByPrimaryKey.handle(updateTagRelationshipInput.getArticleId()),
+					findTagsTagIdByPrimaryKey.handle(updateTagRelationshipInput.getTagId()));
 		tagRelationshipRepository.update(tagRelationship);
     
 		return tagRelationship;

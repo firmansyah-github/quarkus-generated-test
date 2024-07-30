@@ -1,4 +1,4 @@
-// created by the factor : Feb 23, 2024, 6:45:22 AM  
+// created by the factor : May 30, 2024, 6:48:44 AM  
 package firmansyah.integration;
 
 import static io.restassured.RestAssured.given;
@@ -14,6 +14,8 @@ import static org.hamcrest.Matchers.anyOf;
 
 import jakarta.ws.rs.core.MediaType;
 
+import java.util.Base64;
+
 import org.apache.http.HttpStatus;
 import firmansyah.application.web.model.request.NewFavoriteRelationshipRequest;
 import firmansyah.application.web.model.request.UpdateFavoriteRelationshipRequest;
@@ -22,15 +24,27 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
+import io.restassured.config.HttpClientConfig;
+import io.restassured.config.RestAssuredConfig;
+import org.junit.jupiter.api.BeforeEach;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @QuarkusTest
 public class FavoriteRelationshipResourceIntegrationTest extends ResourcesIntegrationTest {
 
 	private final String FAVORITERELATIONSHIP_RESOURCE_PATH = API_PREFIX + "/firmansyah/favoriteRelationship";
   
+    @BeforeEach
+    public void setup() {
+        RestAssured.config = RestAssuredConfig.config().httpClient(HttpClientConfig.httpClientConfig()
+                .setParam("http.socket.timeout", 600000)  // 60 seconds
+                .setParam("http.connection.timeout", 600000));  // 60 seconds
+    } 
+    
+    
 	@Test
   	public void givenANewFavoriteRelationship_whenExecuteCreateEndpoint_shouldReturnCreatedFavoriteRelationship201() throws JsonProcessingException {
 		final var user = createUserEntity("user1", "user1@mail.com", "bio", "image", "password");

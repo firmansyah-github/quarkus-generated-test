@@ -1,4 +1,4 @@
-// created by the factor : Feb 23, 2024, 6:45:22 AM  
+// created by the factor : May 30, 2024, 6:48:44 AM  
 package firmansyah.domain.validator;
 
 import lombok.AllArgsConstructor;
@@ -17,15 +17,20 @@ public class ModelValidator {
   	private final Validator validator;
 
   	public <T> T validate(T model) {
-    	Set<ConstraintViolation<T>> constraintViolations = validator.validate(model);
+    	try {
+			Set<ConstraintViolation<T>> constraintViolations = validator.validate(model);
 
-    	if (!constraintViolations.isEmpty()) {
-      		final var messages =
-          		constraintViolations.stream()
-              		.map(ConstraintViolation::getMessage)
-              		.collect(Collectors.toList());
-      		throw new ModelValidationException(messages);
-    	}
+			if (!constraintViolations.isEmpty()) {
+				final var messages =
+			  		constraintViolations.stream()
+			      		.map(ConstraintViolation::getMessage)
+			      		.collect(Collectors.toList());
+				throw new ModelValidationException(messages);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
     	return model;
   	}

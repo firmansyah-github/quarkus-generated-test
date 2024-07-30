@@ -1,4 +1,4 @@
-// created by the factor : Feb 23, 2024, 6:45:22 AM  
+// created by the factor : May 30, 2024, 6:48:44 AM  
 package firmansyah.infrastructure.configuration;
 
 import firmansyah.domain.feature.*;
@@ -20,10 +20,10 @@ public class CommentsConfiguration {
   	@Singleton
   	public CreateComments createComments(
 		CommentsRepository commentsRepository,
-      	CommentsModelBuilder commentsBuilder ,FindUsersByPrimaryKey findUsersAuthorIdByPrimaryKey,FindArticlesByPrimaryKey findArticlesArticleIdByPrimaryKey) {
+      	CommentsModelBuilder commentsBuilder ,FindArticlesByPrimaryKey findArticlesArticleIdByPrimaryKey,FindUsersByPrimaryKey findUsersAuthorIdByPrimaryKey) {
     	return new CreateCommentsImpl(
         	commentsRepository,
-        	commentsBuilder ,findUsersAuthorIdByPrimaryKey,findArticlesArticleIdByPrimaryKey);
+        	commentsBuilder ,findArticlesArticleIdByPrimaryKey,findUsersAuthorIdByPrimaryKey);
   	}
   
   	@Produces
@@ -51,11 +51,11 @@ public class CommentsConfiguration {
   	public UpdateComments updateComments(
 		CommentsRepository commentsRepository,
       	CommentsModelBuilder commentsBuilder,
-      	FindCommentsByPrimaryKey findCommentsByPrimaryKey	,FindUsersByPrimaryKey findUsersAuthorIdByPrimaryKey,FindArticlesByPrimaryKey findArticlesArticleIdByPrimaryKey) {
+      	FindCommentsByPrimaryKey findCommentsByPrimaryKey	,FindArticlesByPrimaryKey findArticlesArticleIdByPrimaryKey,FindUsersByPrimaryKey findUsersAuthorIdByPrimaryKey) {
 		return new UpdateCommentsImpl(
         	commentsRepository,
         	commentsBuilder,
-        	findCommentsByPrimaryKey ,findUsersAuthorIdByPrimaryKey,findArticlesArticleIdByPrimaryKey);
+        	findCommentsByPrimaryKey ,findArticlesArticleIdByPrimaryKey,findUsersAuthorIdByPrimaryKey);
   	}
   
 

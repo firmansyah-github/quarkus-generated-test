@@ -1,4 +1,4 @@
-// created by the factor : Feb 23, 2024, 6:45:22 AM  
+// created by the factor : May 30, 2024, 6:48:44 AM  
 package firmansyah.infrastructure.repository.hibernate.panache;
 
 import java.util.LinkedHashMap;
@@ -19,8 +19,8 @@ import firmansyah.infrastructure.repository.hibernate.entity.EntityUtils;
 import firmansyah.infrastructure.repository.hibernate.panache.utils.SimpleQueryBuilder;
 import firmansyah.domain.feature.FindTagRelationshipByPrimaryKey;
 import firmansyah.infrastructure.repository.hibernate.entity.TagRelationshipEntityKey;
-import firmansyah.infrastructure.repository.hibernate.entity.TagsEntity;
 import firmansyah.infrastructure.repository.hibernate.entity.ArticlesEntity;
+import firmansyah.infrastructure.repository.hibernate.entity.TagsEntity;
 
 import java.time.LocalDateTime;
 
@@ -38,9 +38,9 @@ public class TagRelationshipRepositoryPanache extends AbstractPanacheRepository<
 
   	@Override
   	public void save(TagRelationship tagRelationship) {
-		final var tagsTagIdEntity = getEntityManager().find(TagsEntity.class,tagRelationship.getTagsTagId().getId());
 		final var articlesArticleIdEntity = getEntityManager().find(ArticlesEntity.class,tagRelationship.getArticlesArticleId().getId());
-		persistAndFlush(new TagRelationshipEntity(tagRelationship ,tagsTagIdEntity,articlesArticleIdEntity));
+		final var tagsTagIdEntity = getEntityManager().find(TagsEntity.class,tagRelationship.getTagsTagId().getId());
+		persistAndFlush(new TagRelationshipEntity(tagRelationship ,articlesArticleIdEntity,tagsTagIdEntity));
 		
   	}
 
@@ -56,21 +56,21 @@ public class TagRelationshipRepositoryPanache extends AbstractPanacheRepository<
 
   	@Override
   	public void update(TagRelationship tagRelationship) {
-		final var tagsTagIdEntity= getEntityManager().find(TagsEntity.class, tagRelationship.getTagsTagId().getId());
 		final var articlesArticleIdEntity= getEntityManager().find(ArticlesEntity.class, tagRelationship.getArticlesArticleId().getId());
+		final var tagsTagIdEntity= getEntityManager().find(TagsEntity.class, tagRelationship.getTagsTagId().getId());
 		final var tagRelationshipEntityKey = new TagRelationshipEntityKey();
 		tagRelationshipEntityKey.setArticlesArticleId(articlesArticleIdEntity);
 		tagRelationshipEntityKey.setTagsTagId(tagsTagIdEntity);
 		final var tagRelationshipEntity = getEntityManager().find(TagRelationshipEntity.class, tagRelationshipEntityKey);
-		tagRelationshipEntity.update(tagRelationship ,tagsTagIdEntity,articlesArticleIdEntity);
+		tagRelationshipEntity.update(tagRelationship ,articlesArticleIdEntity,tagsTagIdEntity);
 		
     }
 
   
   	@Override
   	public boolean delete(String articleId,String tagId) {
-		final var tagsTagIdEntity=getEntityManager().find(TagsEntity.class, tagId);
 		final var articlesArticleIdEntity=getEntityManager().find(ArticlesEntity.class, articleId);
+		final var tagsTagIdEntity=getEntityManager().find(TagsEntity.class, tagId);
 		final var tagRelationshipEntityKey = new TagRelationshipEntityKey();
 		tagRelationshipEntityKey.setArticlesArticleId(articlesArticleIdEntity);
 		tagRelationshipEntityKey.setTagsTagId(tagsTagIdEntity);
